@@ -3,7 +3,11 @@ const { LoadText } = require('../utility')
 
 module.exports = {
     USER: {
-        getAllUsersFromBcts: LoadText(__dirname + '/user/get-all-users-from-bcts.sql')
+        getAllUsersFromBcts: LoadText(__dirname + '/user/get-all-users-from-bcts.sql'),
+        getAllCars: LoadText(__dirname +     '/api-user/get-all-users.sql'),
+        addNewUserInfo:LoadText(__dirname +  '/api-user/add-new-user-info.sql'),
+        updateUserInfo: LoadText(__dirname + '/api-user/update-user-info.sql'),
+        deleteUserInfo: LoadText(__dirname + '/api-user/delete-user-info.sql'),
     },
     VOYAGE: {
         loadLastVoyages: LoadText(__dirname + '/voyage/load-last-voyages.sql'),
@@ -13,7 +17,19 @@ module.exports = {
         getAllCars: LoadText(__dirname + '/api-car/get-all-cars.sql'),
         addNewCarInfo:LoadText(__dirname + '/api-car/add-new-car-info.sql'),
         updateCarInfo: LoadText(__dirname + '/api-car/update-car-info.sql'),
-        deleteCarInfo:LoadText(__dirname + '/api-car/delete-car-info.sql')
+        deleteCarInfo: LoadText(__dirname + '/api-car/delete-car-info.sql'),
+    },
+    QRLINK:{
+        getAllQrLinks: LoadText(__dirname + '/api-qrLink/get-all-qr-links.sql'),
+        addNewQrLinkInfo:LoadText(__dirname + '/api-qrLink/add-new-qr-link-info.sql'),
+        updateQrLinkInfo: LoadText(__dirname + '/api-qrLink/update-qr-link-info.sql'),
+        deleteQrLinkInfo: LoadText(__dirname + '/api-qrLink/delete-qr-link-info.sql'),
+    },
+    MESSAGETEMPLATE:{
+        getAllMessageTemplates: LoadText(__dirname +    '/api-messageTemplate/get-all-message-templates.sql'),
+        addNewMessageTemplateInfo:LoadText(__dirname +  '/api-messageTemplate/add-new-message-template-info.sql'),
+        updateMessageTemplateInfo: LoadText(__dirname + '/api-messageTemplate/update-message-template-info.sql'),
+        deleteMessageTemplateInfo: LoadText(__dirname + '/api-messageTemplate/delete-message-template-info.sql'),
     },
     VESSEL: {
         DECK: {

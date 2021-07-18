@@ -17,13 +17,21 @@
       "description": "API for users in the system"
     }
   ],
-  "schemes": ["http"],
-  "consumes": ["application/json"],
-  "produces": ["application/json"],
+  "schemes": [
+    "http"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
   "paths": {
     "/api/car/getAllCars": {
       "get": {
-        "tags": ["Cars"],
+        "tags": [
+          "Cars"
+        ],
         "summary": "Get all cars in system",
         "responses": {
           "200": {
@@ -37,7 +45,9 @@
     },
     "/api/car/addNewCarInfo": {
       "post": {
-        "tags": ["Cars"],
+        "tags": [
+          "Cars"
+        ],
         "description": "Create new user in system",
         "parameters": [
           {
@@ -49,7 +59,9 @@
             }
           }
         ],
-        "produces": ["application/json"],
+        "produces": [
+          "application/json"
+        ],
         "responses": {
           "200": {
             "description": "New car is created",
@@ -62,7 +74,9 @@
     },
     "/api/car/updateCarInfo": {
       "put": {
-        "tags": ["Cars"],
+        "tags": [
+          "Cars"
+        ],
         "description": "update car info in system",
         "parameters": [
           {
@@ -74,7 +88,9 @@
             }
           }
         ],
-        "produces": ["application/json"],
+        "produces": [
+          "application/json"
+        ],
         "responses": {
           "200": {
             "description": "car info is updated",
@@ -87,8 +103,10 @@
     },
     "/api/car/deleteCarInfo": {
       "delete": {
-        "tags": ["Cars"],
-        "description": "delete car info in system",
+        "summary": "Delete car with given ID",
+        "tags": [
+          "Cars"
+        ],
         "parameters": [
           {
             "name": "car",
@@ -99,12 +117,311 @@
             }
           }
         ],
-        "produces": ["application/json"],
         "responses": {
           "200": {
-            "description": "car info is deleted",
+            "description": "Car is deleted",
             "schema": {
               "$ref": "#/definitions/DeleteCar"
+            }
+          }
+        }
+      }
+    },
+    "/api/qrLink/getQrLinks": {
+      "get": {
+        "tags": [
+          "QrLink"
+        ],
+        "summary": "Get all QrLinks in system",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/QrLinks"
+            }
+          }
+        }
+      }
+    },
+    "/api/qrLink/addNewQrLinkInfo": {
+      "post": {
+        "tags": [
+          "QrLink"
+        ],
+        "description": "Create new user in system",
+        "parameters": [
+          {
+            "name": "QrLink",
+            "in": "body",
+            "description": "QrLink that we want to create",
+            "schema": {
+              "$ref": "#/definitions/NewQrLink"
+            }
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "New QrLink is created",
+            "schema": {
+              "$ref": "#/definitions/NewQrLink"
+            }
+          }
+        }
+      }
+    },
+    "/api/qrLink/updateQrLinkInfo": {
+      "put": {
+        "tags": [
+          "QrLink"
+        ],
+        "description": "update QrLink info in system",
+        "parameters": [
+          {
+            "name": "QrLink",
+            "in": "body",
+            "description": "QrLink that we want to update",
+            "schema": {
+              "$ref": "#/definitions/QrLink"
+            }
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "QrLink info is updated",
+            "schema": {
+              "$ref": "#/definitions/QrLink"
+            }
+          }
+        }
+      }
+    },
+    "/api/qrLink/deleteQrLinkInfo": {
+      "delete": {
+        "summary": "Delete car with given ID",
+        "tags": [
+          "QrLink"
+        ],
+        "parameters": [
+          {
+            "name": "QrLink",
+            "in": "body",
+            "description": "QrLink that we want to delete",
+            "schema": {
+              "$ref": "#/definitions/DeleteQrLink"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "QrLink is deleted",
+            "schema": {
+              "$ref": "#/definitions/DeleteQrLink"
+            }
+          }
+        }
+      }
+    },
+    "/api/user/getAllUsers": {
+      "get": {
+        "tags": [
+          "User"
+        ],
+        "summary": "Get all Users in system",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/User"
+            }
+          }
+        }
+      }
+    },
+    "/api/user/addNewUserInfo": {
+      "post": {
+        "tags": [
+          "User"
+        ],
+        "description": "Create new User in system",
+        "parameters": [
+          {
+            "name": "User",
+            "in": "body",
+            "description": "User that we want to create",
+            "schema": {
+              "$ref": "#/definitions/NewUser"
+            }
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "New MessageTemplate is created",
+            "schema": {
+              "$ref": "#/definitions/NewMessageTemplate"
+            }
+          }
+        }
+      }
+    },
+    "/api/user/updateUserInfo": {
+      "put": {
+        "tags": [
+          "User"
+        ],
+        "description": "update User info in system",
+        "parameters": [
+          {
+            "name": "User",
+            "in": "body",
+            "description": "User that we want to update",
+            "schema": {
+              "$ref": "#/definitions/User"
+            }
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "User info is updated",
+            "schema": {
+              "$ref": "#/definitions/User"
+            }
+          }
+        }
+      }
+    },
+    "/api/user/deleteUserInfo": {
+      "delete": {
+        "summary": "Delete User with given ID",
+        "tags": [
+          "User"
+        ],
+        "parameters": [
+          {
+            "name": "User",
+            "in": "body",
+            "description": "User that we want to delete",
+            "schema": {
+              "$ref": "#/definitions/DeleteUser"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "User is deleted",
+            "schema": {
+              "$ref": "#/definitions/DeleteUser"
+            }
+          }
+        }
+      }
+    },
+    "/api/messageTemplate/getMessageTemplates": {
+      "get": {
+        "tags": [
+          "MessageTemplate"
+        ],
+        "summary": "Get all MessageTemplates in system",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/MessageTemplates"
+            }
+          }
+        }
+      }
+    },
+    "/api/messageTemplate/addNewMessageTemplateInfo": {
+      "post": {
+        "tags": [
+          "MessageTemplate"
+        ],
+        "description": "Create new MessageTemplate in system",
+        "parameters": [
+          {
+            "name": "MessageTemplate",
+            "in": "body",
+            "description": "MessageTemplate that we want to create",
+            "schema": {
+              "$ref": "#/definitions/NewMessageTemplate"
+            }
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "New MessageTemplate is created",
+            "schema": {
+              "$ref": "#/definitions/NewMessageTemplate"
+            }
+          }
+        }
+      }
+    },
+    "/api/messageTemplate/updateMessageTemplateInfo": {
+      "put": {
+        "tags": [
+          "MessageTemplate"
+        ],
+        "description": "update MessageTemplate info in system",
+        "parameters": [
+          {
+            "name": "MessageTemplate",
+            "in": "body",
+            "description": "MessageTemplate that we want to update",
+            "schema": {
+              "$ref": "#/definitions/MessageTemplate"
+            }
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "MessageTemplate info is updated",
+            "schema": {
+              "$ref": "#/definitions/MessageTemplate"
+            }
+          }
+        }
+      }
+    },
+    "/api/messageTemplate/deleteMessageTemplateInfo": {
+      "delete": {
+        "summary": "Delete MessageTemplate with given ID",
+        "tags": [
+          "MessageTemplate"
+        ],
+        "parameters": [
+          {
+            "name": "MessageTemplate",
+            "in": "body",
+            "description": "MessageTemplate that we want to delete",
+            "schema": {
+              "$ref": "#/definitions/DeleteMessageTemplate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "MessageTemplate is deleted",
+            "schema": {
+              "$ref": "#/definitions/DeleteMessageTemplate"
             }
           }
         }
@@ -113,37 +430,41 @@
   },
   "definitions": {
     "User": {
-      "required": ["name", "_id", "companies"],
+      "required": [
+        "id",
+        "firstName",
+        "lastName",
+        "mobileNo",
+        "email",
+        "userTypeId",
+        "password",
+        "userCode"
+      ],
       "properties": {
-        "_id": {
+        "id": {
           "type": "integer",
           "uniqueItems": true
         },
-        "isPublic": {
-          "type": "boolean"
-        },
-        "name": {
+        "firstName": {
           "type": "string"
         },
-        "books": {
-          "type": "array",
-          "items": {
-            "type": "object",
-            "properties": {
-              "name": {
-                "type": "string"
-              },
-              "amount": {
-                "type": "number"
-              }
-            }
-          }
+        "lastName": {
+          "type": "string"
         },
-        "companies": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
+        "mobileNo": {
+          "type": "string"
+        },
+        "email": {
+          "type": "string"
+        },
+        "userTypeId":{
+          "type": "integer"
+        },
+        "password":{
+          "type":"string"
+        },
+        "userCode":{
+          "type":"string"
         }
       }
     },
@@ -151,26 +472,80 @@
       "type": "array",
       "$ref": "#/definitions/User"
     },
-    "Car": {
-      "required": ["ID", "Name", "Brand", "Color"],
+    "NewUser": {
+      "required": [
+        "firstName",
+        "lastName",
+        "mobileNo",
+        "email",
+        "userTypeId",
+        "password",
+        "userCode"
+      ],
       "properties": {
-        "ID": {
+        "firstName": {
+          "type": "string"
+        },
+        "lastName": {
+          "type": "string"
+        },
+        "mobileNo": {
+          "type": "string"
+        },
+        "email": {
+          "type": "string"
+        },
+        "userTypeId":{
+          "type": "integer"
+        },
+        "password":{
+          "type":"string"
+        },
+        "userCode":{
+          "type":"string"
+        }
+      }
+    },
+    "DeleteUser": {
+      "required": [
+        "id"
+      ],
+      "properties": {
+        "id": {
+          "type": "integer",
+          "uniqueItems": true
+        }
+      }
+    },
+    "Car": {
+      "required": [
+        "id",
+        "name",
+        "brand",
+        "color"
+      ],
+      "properties": {
+        "id": {
           "type": "integer",
           "uniqueItems": true
         },
-        "Brand": {
+        "brand": {
           "type": "string"
         },
-        "Name": {
+        "name": {
           "type": "string"
         },
-        "Color": {
+        "color": {
           "type": "string"
         }
       }
     },
     "NewCar": {
-      "required": ["name", "brand", "color"],
+      "required": [
+        "name",
+        "brand",
+        "color"
+      ],
       "properties": {
         "brand": {
           "type": "string"
@@ -183,12 +558,110 @@
         }
       }
     },
+    "DeleteCar": {
+      "required": [
+        "id"
+      ],
+      "properties": {
+        "id": {
+          "type": "integer",
+          "uniqueItems": true
+        }
+      }
+    },
     "Cars": {
       "type": "array",
       "$ref": "#/definitions/Car"
     },
-    "DeleteCar": {
-      "required": ["id"],
+    "QrLinks": {
+      "type": "array",
+      "$ref": "#/definitions/QrLink"
+    },
+    "QrLink": {
+      "required": [
+        "id",
+        "linkAddress",
+        "effectiveDate",
+        "qrCodeNo",
+        "isValid"
+      ],
+      "properties": {
+        "id": {
+          "type": "integer",
+          "uniqueItems": true
+        },
+        "linkAddress": {
+          "type": "string"
+        },
+        "effectiveDate": {
+          "type": "date"
+        },
+        "qrCodeNo":{
+          "type":"string"
+        },
+        "isValid":{
+          "type":"bool"
+        }
+      }
+    },
+    "NewQrLink": {
+      "required": [
+        "linkAddress",
+        "effectiveDate"
+      ],
+      "properties": {
+        "linkAddress": {
+          "type": "string"
+        },
+        "effectiveDate": {
+          "type": "date"
+        }
+      }
+    },
+    "DeleteQrLink": {
+      "required": [
+        "id"
+      ],
+      "properties": {
+        "id": {
+          "type": "integer",
+          "uniqueItems": true
+        }
+      }
+    },
+    "MessageTemplates": {
+      "type": "array",
+      "$ref": "#/definitions/MessageTemplate"
+    },
+    "MessageTemplate": {
+      "required": [
+        "id",
+        "message"
+      ],
+      "properties": {
+        "id": {
+          "type": "integer",
+          "uniqueItems": true
+        },
+        "message": {
+          "type": "string"
+        }
+      }
+    },
+    "NewMessageTemplate": {
+      "required": [
+        "message"
+      ],
+      "properties": {
+        "message": {
+          "type": "string"
+        }
+      }
+    },
+    "DeleteMessageTemplate": {
+      "required": [
+        "id"
+      ],
       "properties": {
         "id": {
           "type": "integer",

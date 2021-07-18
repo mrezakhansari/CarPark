@@ -77,7 +77,7 @@ router.delete('/deleteCarInfo', async (req, res) => {
                 "Operation failed";
 
                 console.log(result,req.body)
-            return SendResponse(req, res, data, result[0]['OutVal'] !== false);
+            return SendResponse(req, res, data, result[0]['CarID'] !== false);
     } catch (error) {
         console.log(error)
         return SendResponse(req, res, `deleteCarInfo`, false, 500);

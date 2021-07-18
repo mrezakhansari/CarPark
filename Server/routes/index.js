@@ -9,8 +9,11 @@ module.exports = app => {
   app.use('/api/auth', require('./authentication'));
   app.use('/api/voyage', require('./voyage'));
   app.use('/api/car', require('./api-car'));
+  app.use('/api/qrLink',require('./api-qrLink'));
+  app.use('/api/messageTemplate',require('./api-messageTemplate'));
   app.use('/api/damage', require('./damage'));
   app.use('/api/area', require('./area'));
+  app.use('/api/user',require('./api-user'));
   app.use('/api/appPreference', require('./appPreference'));
   app.use(errorLoger);
 };

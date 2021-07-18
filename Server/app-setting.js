@@ -17,7 +17,7 @@ module.exports = {
                 config: {
                     user: 'sa',
                     password: 'qwe123!@#',
-                    server: '127.0.0.1',
+                    server: 'localhost\\MSSQLSERVER2019',
                     database: 'CaralDB',
 
                     pool: {
