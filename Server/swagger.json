@@ -1,0 +1,200 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "1.0.0",
+    "title": "My User Project CRUD",
+    "description": "My User Project Application API",
+    "license": {
+      "name": "MIT",
+      "url": "https://opensource.org/licenses/MIT"
+    }
+  },
+  "host": "localhost:4300",
+  "basePath": "/",
+  "tags": [
+    {
+      "name": "Users",
+      "description": "API for users in the system"
+    }
+  ],
+  "schemes": ["http"],
+  "consumes": ["application/json"],
+  "produces": ["application/json"],
+  "paths": {
+    "/api/car/getAllCars": {
+      "get": {
+        "tags": ["Cars"],
+        "summary": "Get all cars in system",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Cars"
+            }
+          }
+        }
+      }
+    },
+    "/api/car/addNewCarInfo": {
+      "post": {
+        "tags": ["Cars"],
+        "description": "Create new user in system",
+        "parameters": [
+          {
+            "name": "car",
+            "in": "body",
+            "description": "Car that we want to create",
+            "schema": {
+              "$ref": "#/definitions/NewCar"
+            }
+          }
+        ],
+        "produces": ["application/json"],
+        "responses": {
+          "200": {
+            "description": "New car is created",
+            "schema": {
+              "$ref": "#/definitions/NewCar"
+            }
+          }
+        }
+      }
+    },
+    "/api/car/updateCarInfo": {
+      "put": {
+        "tags": ["Cars"],
+        "description": "update car info in system",
+        "parameters": [
+          {
+            "name": "car",
+            "in": "body",
+            "description": "Car that we want to update",
+            "schema": {
+              "$ref": "#/definitions/Car"
+            }
+          }
+        ],
+        "produces": ["application/json"],
+        "responses": {
+          "200": {
+            "description": "car info is updated",
+            "schema": {
+              "$ref": "#/definitions/Car"
+            }
+          }
+        }
+      }
+    },
+    "/api/car/deleteCarInfo": {
+      "delete": {
+        "tags": ["Cars"],
+        "description": "delete car info in system",
+        "parameters": [
+          {
+            "name": "car",
+            "in": "body",
+            "description": "Car that we want to delete",
+            "schema": {
+              "$ref": "#/definitions/DeleteCar"
+            }
+          }
+        ],
+        "produces": ["application/json"],
+        "responses": {
+          "200": {
+            "description": "car info is deleted",
+            "schema": {
+              "$ref": "#/definitions/DeleteCar"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "User": {
+      "required": ["name", "_id", "companies"],
+      "properties": {
+        "_id": {
+          "type": "integer",
+          "uniqueItems": true
+        },
+        "isPublic": {
+          "type": "boolean"
+        },
+        "name": {
+          "type": "string"
+        },
+        "books": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "name": {
+                "type": "string"
+              },
+              "amount": {
+                "type": "number"
+              }
+            }
+          }
+        },
+        "companies": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "Users": {
+      "type": "array",
+      "$ref": "#/definitions/User"
+    },
+    "Car": {
+      "required": ["ID", "Name", "Brand", "Color"],
+      "properties": {
+        "ID": {
+          "type": "integer",
+          "uniqueItems": true
+        },
+        "Brand": {
+          "type": "string"
+        },
+        "Name": {
+          "type": "string"
+        },
+        "Color": {
+          "type": "string"
+        }
+      }
+    },
+    "NewCar": {
+      "required": ["name", "brand", "color"],
+      "properties": {
+        "brand": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "color": {
+          "type": "string"
+        }
+      }
+    },
+    "Cars": {
+      "type": "array",
+      "$ref": "#/definitions/Car"
+    },
+    "DeleteCar": {
+      "required": ["id"],
+      "properties": {
+        "id": {
+          "type": "integer",
+          "uniqueItems": true
+        }
+      }
+    }
+  }
+}
