@@ -9,6 +9,9 @@ module.exports = {
         updateUserInfo: LoadText(__dirname + '/api-user/update-user-info.sql'),
         deleteUserInfo: LoadText(__dirname + '/api-user/delete-user-info.sql'),
     },
+    DRIVER:{
+        registerDriver: LoadText(__dirname + '/api-register/register-driver.sql'),
+    },
     VOYAGE: {
         loadLastVoyages: LoadText(__dirname + '/voyage/load-last-voyages.sql'),
         getLoadUnloadStatisticsByVoyageId: LoadText(__dirname + '/voyage/get-load-unload-statistics-by-voyageid.sql')

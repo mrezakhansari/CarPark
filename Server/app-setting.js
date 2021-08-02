@@ -17,17 +17,17 @@ module.exports = {
                 config: {
                     user: 'sa',
                     password: 'qwe123!@#',
-                    server: 'localhost\\MSSQLSERVER2019',
-                    database: 'CaralDB',
-
+                    server: 'localhost',
+                    database: 'Caral',
                     pool: {
                         max: 10,
                         min: 0,
                         idleTimeoutMillis: 60000
                     },
+                    stream:true,
                     options: {
 
-                        encrypt: true,
+                       // encrypt: true,
                         enableArithAbort: true
                     }
                 }

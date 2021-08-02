@@ -17,5 +17,6 @@ module.exports = app => {
   app.use('/api/area', require('./area'));
   app.use('/api/user',require('./api-user'));
   app.use('/api/appPreference', require('./appPreference'));
+  app.use('/api/registerDriver', require('./api-register'));
   app.use(errorLoger);
 };

@@ -13,6 +13,7 @@ router.get('/getMessageTemplates', async (req, res) => {
         var result = await db.query(queries.MESSAGETEMPLATE.getAllMessageTemplates);
         SendResponse(req, res, result, (result && result.length > 0))
     } catch (error) {
+        console.log(error)
         return SendResponse(req, res, `getMessageTemplates`, false, 500);
     }
 
