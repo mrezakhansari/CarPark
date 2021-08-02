@@ -11,6 +11,8 @@ module.exports = app => {
   app.use('/api/car', require('./api-car'));
   app.use('/api/qrLink',require('./api-qrLink'));
   app.use('/api/messageTemplate',require('./api-messageTemplate'));
+  app.use('/api/userCarAssign',require('./api-userCarAssign'));
+  app.use('/api/userCarAssignMessage',require('./api-userCarAssignMessage'));
   app.use('/api/damage', require('./damage'));
   app.use('/api/area', require('./area'));
   app.use('/api/user',require('./api-user'));

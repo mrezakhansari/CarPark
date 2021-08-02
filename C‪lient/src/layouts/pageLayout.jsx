@@ -2,7 +2,7 @@ import React from "react";
 import templateConfig from "../templateConfig";
 import classnames from "classnames";
 
-const FirstPageLayout = ({ children, ...rest }) => {
+const PageLayout = ({ children, ...rest }) => {
    return (
       <div
          className={classnames("error-layout bg-gallery-1 ", {
@@ -14,4 +14,4 @@ const FirstPageLayout = ({ children, ...rest }) => {
    );
 };
 
-export default FirstPageLayout;
+export default PageLayout;

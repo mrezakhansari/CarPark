@@ -4,7 +4,7 @@ import { BrowserRouter, Switch, Redirect } from "react-router-dom";
 import Spinner from "../components/spinner/spinner";
 import { connect } from "react-redux";
 // import internal(own) modules
-import FirstPageRoute from "../layouts/routes/firstPageRoute";
+import PageRoute from "../layouts/routes/pageRoute";
 import MainLayoutRoutes from "../layouts/routes/mainRoutes";
 import LoginLayoutRoute from "../layouts/routes/loginRoutes"
 import LogoutLayoutRoute from "../layouts/routes/logoutRoutes";
@@ -14,6 +14,7 @@ import urls from '../urls.json';
 //#region User Pages ------------------------------------------------------------------
 
 const LazyFirstPage = lazy(() => import("../views/pages/firstPage"));
+const LazyMessageToDriverPage = lazy(() => import("../views/pages/messageToDriverPage"));
 const LazyUserProfile = lazy(() => import("../views/pages/userProfile"));
 const LazyHistoryTrackingPage = lazy(() => import("../views/pages/mapTracking"));
 const LazyFinancePage = lazy(() => import("../views/pages/financePage"));
@@ -27,7 +28,7 @@ const LazyLogout = lazy(() => import("../views/pages/logoutPage"));
 const LazyLoginPage = lazy(() => import("../views/pages/loginPage"));
 const LazyVehicles = lazy(() => import("../views/pages/vehiclesPage"));
 const LazyUsersPage = lazy(() => import("../views/pages/usersPage"));
-const LazyProductsPage = lazy(()=>import("../views/pages/productsPage"));
+const LazyProductsPage = lazy(() => import("../views/pages/productsPage"));
 
 //#endregion --------------------------------------------------------------------------
 
@@ -48,9 +49,18 @@ class Router extends Component {
       <BrowserRouter basename="/">
         <Switch>
 
-        <FirstPageRoute
+          <PageRoute
             exact
-            path={urls.FirstPage}
+            path={urls.Code}
+            render={(matchprops) => (
+              <Suspense fallback={<Spinner />}>
+                <LazyMessageToDriverPage {...matchprops} />
+              </Suspense>)}
+          />
+
+          <PageRoute
+            exact
+            path={urls.RegisterDriver}
             render={(matchprops) => (
               <Suspense fallback={<Spinner />}>
                 <LazyFirstPage {...matchprops} />

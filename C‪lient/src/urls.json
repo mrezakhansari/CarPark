@@ -15,5 +15,6 @@
     "PaymentResult":"/paymentResult",
     "UserProfile":"/userProfile",
     "Home": "/",
-    "FirstPage":"/firstPage"
+    "Code":"/code/:id",
+    "RegisterDriver":"/registerDriver"
 }

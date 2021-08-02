@@ -9,8 +9,7 @@ import _ from "lodash";
 import * as auth from "../../services/smsService"
 import FormikControl from "../../components/common/formik/FormikControl";
 
-import ReactRevealText from 'react-reveal-text'
-
+import ReactRevealText from 'react-reveal-text';
 
 toast.configure({ bodyClassName: "customFont" });
 
@@ -75,6 +74,7 @@ const brandOptions = [
 const FirstPage = (props) => {
 
   const [counter, setCounter] = useState(0);
+
   useEffect(() => {
     let timer1;
     if (counter > 0) {
@@ -187,7 +187,7 @@ const FirstPage = (props) => {
   const [mobileNo, setMobileNo] = useState(null);
   const [brandStatus, setBrandStatus] = useState("");
   const [models, setModels] = useState([]);
-  const [selectModel,setSelectModel]=useState("");
+  const [selectModel, setSelectModel] = useState("");
 
   //#endregion -----------------------------------------------------------
 
@@ -225,7 +225,7 @@ const FirstPage = (props) => {
         value: c.value
       }
     });
-    if (eee.length>0){
+    if (eee.length > 0) {
       setModels(eee);
     }
     setSelectModel("");
@@ -344,7 +344,7 @@ const FirstPage = (props) => {
 
                               <Button name="firstVerifyButton" color="primary" type="submit" className="mr-1" disabled={!formik.isValid}>
                                 <LogIn size={16} color="#FFF" /> Enter
-                            </Button>
+                              </Button>
 
                             </div>
                           </Form>

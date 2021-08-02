@@ -4,8 +4,8 @@ const { LoadText } = require('../utility')
 module.exports = {
     USER: {
         getAllUsersFromBcts: LoadText(__dirname + '/user/get-all-users-from-bcts.sql'),
-        getAllCars: LoadText(__dirname +     '/api-user/get-all-users.sql'),
-        addNewUserInfo:LoadText(__dirname +  '/api-user/add-new-user-info.sql'),
+        getAllCars: LoadText(__dirname + '/api-user/get-all-users.sql'),
+        addNewUserInfo: LoadText(__dirname + '/api-user/add-new-user-info.sql'),
         updateUserInfo: LoadText(__dirname + '/api-user/update-user-info.sql'),
         deleteUserInfo: LoadText(__dirname + '/api-user/delete-user-info.sql'),
     },
@@ -13,23 +13,29 @@ module.exports = {
         loadLastVoyages: LoadText(__dirname + '/voyage/load-last-voyages.sql'),
         getLoadUnloadStatisticsByVoyageId: LoadText(__dirname + '/voyage/get-load-unload-statistics-by-voyageid.sql')
     },
-    CAR:{
+    CAR: {
         getAllCars: LoadText(__dirname + '/api-car/get-all-cars.sql'),
-        addNewCarInfo:LoadText(__dirname + '/api-car/add-new-car-info.sql'),
+        addNewCarInfo: LoadText(__dirname + '/api-car/add-new-car-info.sql'),
         updateCarInfo: LoadText(__dirname + '/api-car/update-car-info.sql'),
         deleteCarInfo: LoadText(__dirname + '/api-car/delete-car-info.sql'),
     },
-    QRLINK:{
+    QRLINK: {
         getAllQrLinks: LoadText(__dirname + '/api-qrLink/get-all-qr-links.sql'),
-        addNewQrLinkInfo:LoadText(__dirname + '/api-qrLink/add-new-qr-link-info.sql'),
+        addNewQrLinkInfo: LoadText(__dirname + '/api-qrLink/add-new-qr-link-info.sql'),
         updateQrLinkInfo: LoadText(__dirname + '/api-qrLink/update-qr-link-info.sql'),
         deleteQrLinkInfo: LoadText(__dirname + '/api-qrLink/delete-qr-link-info.sql'),
     },
-    MESSAGETEMPLATE:{
-        getAllMessageTemplates: LoadText(__dirname +    '/api-messageTemplate/get-all-message-templates.sql'),
-        addNewMessageTemplateInfo:LoadText(__dirname +  '/api-messageTemplate/add-new-message-template-info.sql'),
+    MESSAGETEMPLATE: {
+        getAllMessageTemplates: LoadText(__dirname + '/api-messageTemplate/get-all-message-templates.sql'),
+        addNewMessageTemplateInfo: LoadText(__dirname + '/api-messageTemplate/add-new-message-template-info.sql'),
         updateMessageTemplateInfo: LoadText(__dirname + '/api-messageTemplate/update-message-template-info.sql'),
         deleteMessageTemplateInfo: LoadText(__dirname + '/api-messageTemplate/delete-message-template-info.sql'),
+    },
+    USERCARASSIGN: {
+        getUserCarAssignInfoBasedOnQrCode: LoadText(__dirname + '/api-userCarAssign/get-user-car-assign-info-based-on-qrCode.sql')
+    },
+    USERCARASSIGNMESSAGE:{
+        saveMessage: LoadText(__dirname + '/api-userCarAssignMessage/save-message.sql')
     },
     VESSEL: {
         DECK: {
@@ -49,7 +55,7 @@ module.exports = {
         getDamageInfoByActId: LoadText(__dirname + '/damage/get-damage-info-by-actId.sql'),
         setDamageInfoByActId: LoadText(__dirname + '/damage/set-damage-info-by-actId.sql')
     },
-    APPPREFERENCE:{
+    APPPREFERENCE: {
         getSetting: LoadText(__dirname + '/appPreference/get-setting.sql')
     }
 }
