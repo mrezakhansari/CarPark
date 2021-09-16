@@ -28,7 +28,7 @@ axios.interceptors.response.use(null, error => {
   if (!expectedError) {
     // status code 500
     if (error.response.data.error.message === "Imei exist") {
-      toast.error("تکراری است IMEI کد");
+      toast.error("error");
     }
     else {toast.error("خطا در برقراری ارتباط با سرور. لطفا با ادمین سایت تماس بگیرید");}
     console.log(error.response, error); // eeno bayad log begirim

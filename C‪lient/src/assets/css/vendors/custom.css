@@ -52,6 +52,7 @@
 
 .customFont{
   font-family: 'sans' !important;
+  direction: rtl;
 }
 
 .customIconSizes{

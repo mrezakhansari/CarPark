@@ -15,6 +15,7 @@ import urls from '../urls.json';
 
 const LazyFirstPage = lazy(() => import("../views/pages/firstPage"));
 const LazyMessageToDriverPage = lazy(() => import("../views/pages/messageToDriverPage"));
+const LazyRegisterDriverPage = lazy(()=>import("../views/pages/registerDriverPage"));
 const LazyUserProfile = lazy(() => import("../views/pages/userProfile"));
 const LazyHistoryTrackingPage = lazy(() => import("../views/pages/mapTracking"));
 const LazyFinancePage = lazy(() => import("../views/pages/financePage"));
@@ -48,6 +49,15 @@ class Router extends Component {
       // Set the directory path if you are deplying in sub-folder
       <BrowserRouter basename="/">
         <Switch>
+
+        <PageRoute
+            exact
+            path={urls.RegisterDriver}
+            render={(matchprops) => (
+              <Suspense fallback={<Spinner />}>
+                <LazyRegisterDriverPage {...matchprops} />
+              </Suspense>)}
+          />
 
           <PageRoute
             exact

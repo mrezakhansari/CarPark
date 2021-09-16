@@ -25,7 +25,7 @@ import MinimalStatisticsBG from "../../components/cards/minimalStatisticsBGCard"
 import Plate from "../../components/common/plate";
 import { saveMessage } from "../../services/userCarAssignMessage";
 import { registerDriver } from "../../services/register";
-
+import url from '../../urls.json';
 toast.configure({ bodyClassName: "customFont" });
 
 const asd = ["a", "b"];
@@ -209,7 +209,10 @@ const MessageToDriverPage = (props) => {
     };
     saveMessage(data).then((response) => {
       if (response.data.result) {
-        return toast(response.data.data[0]);
+        toast.success(response.data.data[0]);
+        setTimeout(() => {
+          return props.history.push(url.RegisterDriver);
+        }, 2000);
       }
     });
   };
@@ -218,7 +221,7 @@ const MessageToDriverPage = (props) => {
     console.log(values);
     registerDriver({ mobileNo: values.mobileNo }).then((response) => {
       if (response.data.result) {
-        return toast(response.data.data[0]);
+        return toast.success(response.data.data[0]);
       }
     });
   };
@@ -268,7 +271,6 @@ const MessageToDriverPage = (props) => {
                                   direction: "ltr",
                                 }}
                               >
-                                {state.driverInfo.title}
                                 ماشین: {state.driverInfo.Name}
                               </strong>
                               <hr />
@@ -279,7 +281,7 @@ const MessageToDriverPage = (props) => {
                                   textAlign: "center",
                                 }}
                               >
-                                رنگ: {state.driverInfo.Color}
+                                برند: {state.driverInfo.Brand}
                               </span>
                               <br />
                               <span
@@ -289,8 +291,9 @@ const MessageToDriverPage = (props) => {
                                   textAlign: "center",
                                 }}
                               >
-                                شماره شهربانی: {state.driverInfo.PlateNo}
+                                رنگ: {state.driverInfo.Color}
                               </span>
+                              
                             </div>
                           </React.Fragment>
                         }
@@ -315,167 +318,6 @@ const MessageToDriverPage = (props) => {
                   </Row>
                 )}
                 <hr />
-                <Row>
-                  <Col md="12">
-                    <p
-                      className="mb-1 ltr"
-                      style={{
-                        textAlign: "center",
-                        fontWeight: "bold",
-                        fontSize: 20,
-                        color: "black",
-                      }}
-                    >
-                      ثبت نام به عنوان راننده
-                    </p>
-                  </Col>
-                </Row>
-                <Formik
-                  initialValues={initialValueRegisterDriver}
-                  validationSchema={validationSchemaForRegisterDriver}
-                  onSubmit={async (values) => {
-                    ////console.log("values", values);
-                    await onSubmit(values, props);
-                  }}
-                  validateOnBlur={true}
-                  validateOnMount={true}
-                  enableReinitialize
-                >
-                  {(formik) => {
-                    ////console.log("Formik props values", formik);
-                    console.log(state);
-                    return (
-                      <React.Fragment>
-                        <Form>
-                          <Row>
-                            <Col md="4" style={{ paddingTop: "1.4rem" }}>
-                              <Button color="danger" type="sumbit">
-                                ارسال
-                              </Button>
-                            </Col>
-                            <Col>
-                              <FormikControl
-                                control="customInput"
-                                mask="99999999999"
-                                type="text"
-                                name="mobileNo"
-                                id="mobileNo"
-                                className="ltr"
-                                placeholder="شماره موبایل"
-                              />
-                            </Col>
-                          </Row>
-                        </Form>
-                      </React.Fragment>
-                    );
-                  }}
-                </Formik>
-
-                {/* {
-                  visibleFirstVerify &&
-                  <div className="pt-2">
-
-                    <Formik
-                      initialValues={initialValuesFirstVerify}
-                      validationSchema={validationSchemaFirstVerify}
-                      onSubmit={async (values) => {
-                        ////console.log("values", values);
-                        await onSubmit(values, props);
-                      }}
-                      //validateOnBlur={true}
-                      validateOnMount={true}
-                      enableReinitialize
-                    >
-                      {(formik) => {
-                        ////console.log("Formik props values", formik);
-                        console.log(state)
-                        return (
-                          <React.Fragment>
-                            <Form>
-                              <Row>
-                                <Col md="12">
-                                  <FormikControl
-                                    control="input"
-                                    type="text"
-                                    name="fullName"
-                                    id="fullName"
-                                    className="rtl"
-                                    placeholder="نام و نام خانوادگی"
-                                  />
-                                </Col>
-                              </Row>
-                              <Row>
-                                <Col md="12">
-                                  <FormikControl
-                                    control="customSelect"
-                                    name="brand"
-                                    options={brandOptions.map(c => {
-                                      return {
-                                        label: c.label,
-                                        value: c.value
-                                      }
-                                    })}
-                                    id="brand"
-                                    className="ltr"
-                                    placeholder="برند خودرو"
-                                    classN="rtl"
-                                    onSelectedChanged={onbrandSelectedChanged}
-                                  />
-                                </Col>
-                              </Row>
-                              {brandStatus && <Row>
-                                <Col md="12">
-                                  <FormikControl
-                                    control="customSelect"
-                                    name="model"
-                                    options={models}
-                                    id="model"
-                                    className="ltr"
-                                    placeholder="مدل خودرو"
-                                    selectedValue={selectModel}
-                                  />
-                                </Col>
-                              </Row>}
-                              <Row>
-                                <Col md="12">
-                                  <FormikControl
-                                    control="input"
-                                    type="text"
-                                    name="color"
-                                    id="color"
-                                    className="rtl"
-                                    placeholder="رنگ خودرو"
-                                  />
-                                </Col>
-                              </Row>
-                              <Row>
-                                <Col md="12">
-                                  <FormikControl
-                                    control="inputMaskDebounce"
-                                    mask="09999999999"
-                                    type="text"
-                                    name="mobileNo"
-                                    id="mobileNo"
-                                    className="rtl"
-                                    placeholder="شماره موبایل"
-                                  />
-                                </Col>
-                              </Row>
-
-                              <div className="form-actions center">
-
-                                <Button name="firstVerifyButton" color="primary" type="submit" className="mr-1" disabled={!formik.isValid}>
-                                  <LogIn size={16} color="#FFF" /> Enter
-                                </Button>
-
-                              </div>
-                            </Form>
-                          </React.Fragment>
-                        );
-                      }}
-                    </Formik>
-                  </div>
-                } */}
               </CardBody>
             </Card>
           </Col>
@@ -496,51 +338,71 @@ const MessageToDriverPage = (props) => {
           <Row>
             <Col md="12">
               <Button
-                color="primary"
+                style={{color:"white", backgroundColor:"#0ddb1e"}}
                 onClick={() =>
                   handleSubmitSendMessageToDriver(
                     1,
-                    "  روغن ماشین در حال ریختن است"
+                    "لطفا اقدام به جابجایی خودرو بفرمایید"
                   )
                 }
               >
-                روغن ماشین در حال ریختن است
+                لطفا اقدام به جابجایی خودرو بفرمایید
               </Button>
             </Col>
             <Col md="12">
               <Button
-                color="danger"
+                style={{color:"white", backgroundColor:"#f01f45"}}
                 onClick={() =>
                   handleSubmitSendMessageToDriver(
                     2,
-                    "بنزین ماشین در حال ریختن است"
+                    "لطفا صدای دزدگیر خودرو را قطع نمایید"
                   )
                 }
               >
-                بنزین ماشین در حال ریختن است
+                لطفا صدای دزدگیر خودرو را قطع نمایید
               </Button>
             </Col>
 
-            <Col md="12">
+            {/* <Col md="12">
               <Button
-                color="success"
+              style={{color:"white", backgroundColor:"#f01f45"}}
                 onClick={() =>
-                  handleSubmitSendMessageToDriver(3, "جای پارک مناسب نیست")
+                  handleSubmitSendMessageToDriver(3, "خودرو شما تصادف نموده است")
                 }
               >
-                جای پارک مناسب نیست
+                خودرو شما تصادف نموده است
+              </Button>
+            </Col> */}
+            <Col md="12">
+              <Button
+              style={{color:"white", backgroundColor:"#ff9900"}}
+                onClick={() =>
+                  handleSubmitSendMessageToDriver(4, "خودرو شما دچار نشتی می باشد")
+                }
+              >
+                خودرو شما دچار نشتی می باشد
               </Button>
             </Col>
             <Col md="12">
               <Button
-                color="warning"
+              style={{color:"white", backgroundColor:"#4d4dff"}}
                 onClick={() =>
-                  handleSubmitSendMessageToDriver(5, " ماشین شما تصادف کرده")
+                  handleSubmitSendMessageToDriver(5, "درب/پنجره خودرو شما باز می باشد")
                 }
               >
-                ماشین شما تصادف کرده
+                درب/پنجره خودرو شما باز می باشد
               </Button>
             </Col>
+            {/* <Col md="12">
+              <Button
+              style={{color:"white", backgroundColor:"#00005c"}}
+                onClick={() =>
+                  handleSubmitSendMessageToDriver(7, "در اطراف خودرو شما فعالیت های مشکوکی مشاهده شده")
+                }
+              >
+               در اطراف خودرو شما فعالیت های مشکوکی مشاهده شده
+              </Button>
+            </Col> */}
           </Row>
         </ModalBody>
       </Modal>

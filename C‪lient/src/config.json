@@ -1,7 +1,7 @@
 {
-    "apiUrls": "http://localhost:4300/api",
-    "apiUrl": "http://localhost:4300/api", 
+    "apiUrls": "http://185.105.239.58:8085/api",
+    "apiUrl": "http://185.105.239.58:8085/api", 
     "tokenHashKey": "8c10%$#f9be0b053082",
     "useAuthentication": true,
-    "socketAddress":"http://194.36.174.178:21022/signalr"
+    "socketAddress":"http://185.105.239.58:8085/signalr"
 }

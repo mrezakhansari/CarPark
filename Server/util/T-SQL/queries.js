@@ -5,12 +5,14 @@ module.exports = {
     USER: {
         getAllUsersFromBcts: LoadText(__dirname + '/user/get-all-users-from-bcts.sql'),
         getAllCars: LoadText(__dirname + '/api-user/get-all-users.sql'),
+        getUserInfoById: LoadText(__dirname + '/api-user/get-user-info-by-id.sql'),
         addNewUserInfo: LoadText(__dirname + '/api-user/add-new-user-info.sql'),
         updateUserInfo: LoadText(__dirname + '/api-user/update-user-info.sql'),
         deleteUserInfo: LoadText(__dirname + '/api-user/delete-user-info.sql'),
     },
-    DRIVER:{
+    DRIVER: {
         registerDriver: LoadText(__dirname + '/api-register/register-driver.sql'),
+        checkUserExistsAlready : LoadText(__dirname + '/api-register/check-user-exists-already.sql'),
     },
     VOYAGE: {
         loadLastVoyages: LoadText(__dirname + '/voyage/load-last-voyages.sql'),
@@ -37,7 +39,7 @@ module.exports = {
     USERCARASSIGN: {
         getUserCarAssignInfoBasedOnQrCode: LoadText(__dirname + '/api-userCarAssign/get-user-car-assign-info-based-on-qrCode.sql')
     },
-    USERCARASSIGNMESSAGE:{
+    USERCARASSIGNMESSAGE: {
         saveMessage: LoadText(__dirname + '/api-userCarAssignMessage/save-message.sql')
     },
     VESSEL: {
