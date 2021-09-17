@@ -25,7 +25,7 @@ class SidebarHeader extends Component {
                      <NavLink to="/" className="logo-text float-right mr-4">
                         <div className="logo-img">
                             {
-                              (this.props.collapsedSidebar !==  true) && <img src={LogoDark} alt="logo" />
+                              // (this.props.collapsedSidebar !==  true) && <img src={LogoDark} alt="logo" />
                            } 
                                                     
                         </div>

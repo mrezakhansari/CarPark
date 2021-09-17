@@ -1,5 +1,5 @@
 module.exports = {
-    portNo: 4300,
+    portNo: 4200,
     db: {
         mongo: {
             main: {

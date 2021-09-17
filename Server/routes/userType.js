@@ -7,7 +7,7 @@ const auth = require('../middleware/auth');
 const adminOrSuperuser = require('../middleware/adminOrSuperuser');
 
 router.route('/')
-    .get([auth, adminOrSuperuser],async (req, res) => {
+    .get(async (req, res) => {
         //console.log('userType', req.body)
         try {
             let options = { condition: { name: { $ne: 'Superuser' } } }

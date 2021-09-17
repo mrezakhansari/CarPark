@@ -1,1 +1,1 @@
-Select * from QrLink
+Select * from [User]

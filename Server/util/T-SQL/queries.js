@@ -4,7 +4,8 @@ const { LoadText } = require('../utility')
 module.exports = {
     USER: {
         getAllUsersFromBcts: LoadText(__dirname + '/user/get-all-users-from-bcts.sql'),
-        getAllCars: LoadText(__dirname + '/api-user/get-all-users.sql'),
+        getAllUsers: LoadText(__dirname + '/api-user/get-all-users.sql'),
+        getUserTypes: LoadText(__dirname + '/api-user/get-user-types.sql'),
         getUserInfoById: LoadText(__dirname + '/api-user/get-user-info-by-id.sql'),
         addNewUserInfo: LoadText(__dirname + '/api-user/add-new-user-info.sql'),
         updateUserInfo: LoadText(__dirname + '/api-user/update-user-info.sql'),

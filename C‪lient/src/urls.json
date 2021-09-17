@@ -9,8 +9,9 @@
     "Admin": {
         "Users": "/admin/users",
         "Dashboard": "/admin/dashboard",
-        "Vehicles":"/admin/vehicles",
-        "Products":"/admin/products"
+        "Car":"/admin/car",
+        "Products":"/admin/products",
+        "User":"/admin/user"
     },
     "PaymentResult":"/paymentResult",
     "UserProfile":"/userProfile",

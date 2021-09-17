@@ -10,7 +10,7 @@ const fs = require('fs');
 app.use(cors())
 app.use(express.json());
 app.use(express.static(__dirname + '/www'));
-app.use(require('./middleware/log'))
+//app.use(require('./middleware/log'))
 app.use(require('./bootstrap/init'));
 app.use(require('./middleware/nocache'));
 

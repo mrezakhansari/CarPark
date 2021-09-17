@@ -27,8 +27,8 @@ const LazyLogout = lazy(() => import("../views/pages/logoutPage"));
 //#region Admin Pages -----------------------------------------------------------------
 
 const LazyLoginPage = lazy(() => import("../views/pages/loginPage"));
-const LazyVehicles = lazy(() => import("../views/pages/vehiclesPage"));
-const LazyUsersPage = lazy(() => import("../views/pages/usersPage"));
+const LazyPageCar = lazy(() => import("../views/pages/pageCar"));
+const LazyPageUser = lazy(() => import("../views/pages/pageUser"));
 const LazyProductsPage = lazy(() => import("../views/pages/productsPage"));
 
 //#endregion --------------------------------------------------------------------------
@@ -68,7 +68,7 @@ class Router extends Component {
               </Suspense>)}
           />
 
-          <PageRoute
+          {/* <PageRoute
             exact
             path={urls.RegisterDriver}
             render={(matchprops) => (
@@ -94,8 +94,8 @@ class Router extends Component {
                 <LazyUserProfile {...matchprops} />
               </Suspense>
             )}
-          />
-          <MainLayoutRoutes
+          /> */}
+          {/* <MainLayoutRoutes
             exact
             path={urls.Admin.Users}
             render={(matchprops) => (
@@ -103,17 +103,26 @@ class Router extends Component {
                 <LazyUsersPage {...matchprops} />
               </Suspense>
             )}
-          />
+          /> */}
           <MainLayoutRoutes
             exact
-            path={urls.Admin.Vehicles}
+            path={urls.Admin.User}
             render={(matchprops) => (
               <Suspense fallback={<Spinner />}>
-                <LazyVehicles {...matchprops} />
+                <LazyPageUser {...matchprops} />
               </Suspense>
             )}
           />
           <MainLayoutRoutes
+            exact
+            path={urls.Admin.Car}
+            render={(matchprops) => (
+              <Suspense fallback={<Spinner />}>
+                <LazyPageCar {...matchprops} />
+              </Suspense>
+            )}
+          />
+          {/* <MainLayoutRoutes
             exact
             path={urls.Admin.Products}
             render={(matchprops) => (
@@ -121,7 +130,7 @@ class Router extends Component {
                 <LazyProductsPage {...matchprops} />
               </Suspense>
             )}
-          />
+          /> */}
           {/* <MainLayoutRoutes
             exact
             path={urls.Admin.Dashboard}
@@ -140,7 +149,7 @@ class Router extends Component {
               </Suspense>
             )}
           />
-          <MainLayoutRoutes
+          {/* <MainLayoutRoutes
             exact
             path={urls.MapTracking}
             render={(matchprops) => (
@@ -148,8 +157,8 @@ class Router extends Component {
                 <LazyHistoryTrackingPage {...matchprops} />
               </Suspense>
             )}
-          />
-          <MainLayoutRoutes
+          /> */}
+          {/* <MainLayoutRoutes
             exact
             path={urls.OnlineTracking}
             render={(matchprops) => (
@@ -166,7 +175,7 @@ class Router extends Component {
                 <LazyFinancePage {...matchprops} />
               </Suspense>
             )}
-          />
+          /> */}
           <LogoutLayoutRoute
             exact
             path={urls.Auth.Logout}

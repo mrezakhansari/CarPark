@@ -8,12 +8,28 @@ const auth = require('../middleware/auth');
 const { DoesUserHavePermission } = require('../util/CheckPermission');
 const md5 = require('md5');
 
+
+router.get('/getUserTypes', async (req, res) => {
+    try {
+        const db = sworm.db(setting.db.sqlConfig.CARALDB);
+        var result = await db.query(queries.USER.getUserTypes);
+        console.log("ressfasfasdfasdf",result);
+        SendResponse(req, res, result, (result && result.length > 0))
+    } catch (error) {
+        console.log(error)
+        return SendResponse(req, res, `getUserTypes`, false, 500);
+    }
+
+});
+
 router.get('/getAllUsers', async (req, res) => {
     try {
         const db = sworm.db(setting.db.sqlConfig.CARALDB);
         var result = await db.query(queries.USER.getAllUsers);
+        console.log("ressfasfasdfasdf",result);
         SendResponse(req, res, result, (result && result.length > 0))
     } catch (error) {
+        console.log(error)
         return SendResponse(req, res, `getAllUsers`, false, 500);
     }
 

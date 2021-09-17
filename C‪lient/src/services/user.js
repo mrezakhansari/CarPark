@@ -1,12 +1,27 @@
 import http from "./httpService";
 import { apiUrl } from "../config.json";
 
-const apiEndpoint = apiUrl + "/services/app/User/";
+const apiEndpoint = apiUrl + "/user/";
 
 
-export const getUsers = () => {
+export const getAllUsers = () => {
     //console.log(apiEndpoint)
-    return http.get(apiEndpoint + 'GetAll');
+    return http.get(apiEndpoint + 'getAllUsers');
+}
+
+export const getUserTypes = () => {
+    //console.log(apiEndpoint)
+    return http.get(apiEndpoint + 'getUserTypes');
+}
+
+export const addNewUserInfo = (userInfo) => {
+    //console.log('api for edit user info', userInfo)
+    return http.post(apiEndpoint + 'addNewUserInfo',userInfo);
+}
+
+export const addNewUserInfoFull = (userInfo) => {
+    //console.log('api for edit user info', userInfo)
+    return http.post(apiEndpoint + 'addNewUserInfoFull',userInfo);
 }
 
 export const deleteUserInfo = (userId) => {

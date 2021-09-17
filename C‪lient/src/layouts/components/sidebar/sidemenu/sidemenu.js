@@ -162,7 +162,7 @@ class SideMenuContent extends Component {
             style={{ color: "White", fontSize: 18 }}
             className="mr-3 text-right"
             show={this.state.showUserInfo}
-            text={this.state.user["http://schemas.xmlsoap.org/ws/2005/05/identity/claims/name"] + " خوش آمدید"}
+            text={"ادمین سایت خوش آمدید"}
           ></ReactRevealText>}
         >
         </SideMenu.MenuMultiItems>
