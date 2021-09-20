@@ -42,6 +42,10 @@
       direction: rtl;
   }
 
+  .ltr{
+    direction: ltr;
+  }
+
   h6{
     font-family: 'sans';
 }
@@ -62,6 +66,10 @@
 
 .scrollx{
   overflow-y: scroll;
+}
+
+.customPlatewidth{
+  width: 7vw;
 }
 
 .error{

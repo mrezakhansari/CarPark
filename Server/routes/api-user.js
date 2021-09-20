@@ -13,7 +13,7 @@ router.get('/getUserTypes', async (req, res) => {
     try {
         const db = sworm.db(setting.db.sqlConfig.CARALDB);
         var result = await db.query(queries.USER.getUserTypes);
-        console.log("ressfasfasdfasdf",result);
+        console.log("ressfasfasdfasdf", result);
         SendResponse(req, res, result, (result && result.length > 0))
     } catch (error) {
         console.log(error)
@@ -26,11 +26,38 @@ router.get('/getAllUsers', async (req, res) => {
     try {
         const db = sworm.db(setting.db.sqlConfig.CARALDB);
         var result = await db.query(queries.USER.getAllUsers);
-        console.log("ressfasfasdfasdf",result);
+        console.log("ressfasfasdfasdf", result);
         SendResponse(req, res, result, (result && result.length > 0))
     } catch (error) {
         console.log(error)
         return SendResponse(req, res, `getAllUsers`, false, 500);
+    }
+
+});
+
+router.post('/addNewUserInfoFull', async (req, res) => {
+    try {
+        const db = sworm.db(setting.db.sqlConfig.CARALDB);
+        var result = await db.query(queries.USER.addNewUserInfoFull,
+            {
+                firstName: req.body.firstName,
+                lastName: req.body.lastName,
+                email: req.body.email,
+                password: md5(req.body.password).toUpperCase(),
+                mobileNo: req.body.mobileNo,
+                address: req.body.address,
+                userCode: req.body.userCode,
+                userType:req.body.userType
+            });
+
+        let data = result[0]['OutVal'] !== false ?
+            "The operation has been done successfully" :
+            "Operation failed";
+
+        return SendResponse(req, res, data, result[0]['OutVal'] !== false);
+    } catch (error) {
+        console.log(error)
+        return SendResponse(req, res, `addNewUserInfoFull`, false, 500);
     }
 
 });
@@ -43,14 +70,14 @@ router.post('/addNewUserInfo', async (req, res) => {
                 name: req.body.name,
                 Brand: req.body.brand,
                 color: req.body.color,
-                password : md5(req.body.password).toUpperCase()
+                password: md5(req.body.password).toUpperCase()
             });
 
-            let data = result[0]['OutVal'] !== false ?
-                "The operation has been done successfully" :
-                "Operation failed";
+        let data = result[0]['OutVal'] !== false ?
+            "The operation has been done successfully" :
+            "Operation failed";
 
-            return SendResponse(req, res, data, result[0]['UserID'] !== false);
+        return SendResponse(req, res, data, result[0]['UserID'] !== false);
     } catch (error) {
         console.log(error)
         return SendResponse(req, res, `addNewUserInfo`, false, 500);
@@ -66,15 +93,15 @@ router.put('/updateUserInfo', async (req, res) => {
                 name: req.body.name,
                 Brand: req.body.brand,
                 color: req.body.color,
-                id:req.body.id
+                id: req.body.id
             });
 
-            let data = result[0]['OutVal'] !== false ?
-                "The operation has been done successfully" :
-                "Operation failed";
+        let data = result[0]['OutVal'] !== false ?
+            "The operation has been done successfully" :
+            "Operation failed";
 
-                console.log(result,req.body)
-            return SendResponse(req, res, data, result[0]['UserID'] !== false);
+        console.log(result, req.body)
+        return SendResponse(req, res, data, result[0]['UserID'] !== false);
     } catch (error) {
         console.log(error)
         return SendResponse(req, res, `updateUserInfo`, false, 500);
@@ -87,15 +114,15 @@ router.delete('/deleteUserInfo', async (req, res) => {
         const db = sworm.db(setting.db.sqlConfig.CARALDB);
         var result = await db.query(queries.USER.deleteUserInfo,
             {
-                id:req.body.id
+                id: req.body.id
             });
 
-            let data = result[0]['OutVal'] !== false ?
-                "The operation has been done successfully" :
-                "Operation failed";
+        let data = result[0]['OutVal'] !== false ?
+            "The operation has been done successfully" :
+            "Operation failed";
 
-                console.log(result,req.body)
-            return SendResponse(req, res, data, result[0]['UserID'] !== false);
+        console.log(result, req.body)
+        return SendResponse(req, res, data, result[0]['UserID'] !== false);
     } catch (error) {
         console.log(error)
         return SendResponse(req, res, `deleteUserInfo`, false, 500);

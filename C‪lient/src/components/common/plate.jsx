@@ -17,7 +17,7 @@ class Plate extends Component {
         const seocnd = this.props.plateNo.substring(2, 3);
         const third = this.props.plateNo.substring(3, 6);
         const forth = this.props.plateNo.substring(6, 8);
-        console.log(data,first, seocnd, third, forth)
+        //console.log(data,first, seocnd, third, forth)
         this.state = {
             //plateNo: data,
             first:first,
@@ -36,7 +36,7 @@ class Plate extends Component {
                     <div className="head-image">
                         <img src={plateNoPNG} alt="plateNo" style={{ width: "100%", height: "100%" }} />
                     </div>
-                    <div className="text-on-image" style={{ fontWeight: "bold", fontSize: "3.3rem", direction: "rtl" }}>
+                    <div className="text-on-image" style={{ fontWeight: "bold", fontSize: "1.5vw", direction: "rtl",marginTop:"0.5rem" }}>
                         {/* <span className="ml-3">{this.state.plateNo[2]}</span>
                         <span className="ml-4">{this.state.plateNo[3]}</span>
                         <span className="ml-3">{this.dict[this.state.plateNo[1]]}</span>

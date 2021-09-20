@@ -30,7 +30,7 @@ const LazyLoginPage = lazy(() => import("../views/pages/loginPage"));
 const LazyPageCar = lazy(() => import("../views/pages/pageCar"));
 const LazyPageUser = lazy(() => import("../views/pages/pageUser"));
 const LazyProductsPage = lazy(() => import("../views/pages/productsPage"));
-
+const LazyPageAssign = lazy(()=>import("../views/pages/PageAssign"));
 //#endregion --------------------------------------------------------------------------
 
 
@@ -119,6 +119,15 @@ class Router extends Component {
             render={(matchprops) => (
               <Suspense fallback={<Spinner />}>
                 <LazyPageCar {...matchprops} />
+              </Suspense>
+            )}
+          />
+          <MainLayoutRoutes
+            exact
+            path={urls.Admin.Assign}
+            render={(matchprops) => (
+              <Suspense fallback={<Spinner />}>
+                <LazyPageAssign {...matchprops} />
               </Suspense>
             )}
           />

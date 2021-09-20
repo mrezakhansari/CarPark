@@ -23,6 +23,7 @@ const MenuList = [
             // { name: "داشبورد مدیریتی", key: "ADMIN-DASHBOARD", url: urls.Admin.Dashboard, child: [] },
             { name: "مدیریت خودرو", key: "ADMIN-CAR", url: urls.Admin.Car, child: [] },
             { name: "مدیریت کاربران", key: "ADMIN-User", url: urls.Admin.User, child: [] },
+            { name: "مدیریت تخصیص", key: "ADMIN-Assign", url: urls.Admin.Assign, child: [] },
             { name: "مدیریت وسیله ها", key: "ADMIN-VEHICLES", url: urls.Admin.Vehicles, child: [] },
             { name: "مدیریت محصولات", key: "ADMIN-PRODUCTS", url: urls.Admin.Products, child: [] }
         ]

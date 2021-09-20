@@ -8,12 +8,13 @@ module.exports = {
         getUserTypes: LoadText(__dirname + '/api-user/get-user-types.sql'),
         getUserInfoById: LoadText(__dirname + '/api-user/get-user-info-by-id.sql'),
         addNewUserInfo: LoadText(__dirname + '/api-user/add-new-user-info.sql'),
+        addNewUserInfoFull: LoadText(__dirname + '/api-user/add-new-user-info-full.sql'),
         updateUserInfo: LoadText(__dirname + '/api-user/update-user-info.sql'),
         deleteUserInfo: LoadText(__dirname + '/api-user/delete-user-info.sql'),
     },
     DRIVER: {
         registerDriver: LoadText(__dirname + '/api-register/register-driver.sql'),
-        checkUserExistsAlready : LoadText(__dirname + '/api-register/check-user-exists-already.sql'),
+        checkUserExistsAlready: LoadText(__dirname + '/api-register/check-user-exists-already.sql'),
     },
     VOYAGE: {
         loadLastVoyages: LoadText(__dirname + '/voyage/load-last-voyages.sql'),
@@ -38,7 +39,9 @@ module.exports = {
         deleteMessageTemplateInfo: LoadText(__dirname + '/api-messageTemplate/delete-message-template-info.sql'),
     },
     USERCARASSIGN: {
-        getUserCarAssignInfoBasedOnQrCode: LoadText(__dirname + '/api-userCarAssign/get-user-car-assign-info-based-on-qrCode.sql')
+        getUserCarAssignInfoBasedOnQrCode: LoadText(__dirname + '/api-userCarAssign/get-user-car-assign-info-based-on-qrCode.sql'),
+        getAllUserCarAssignInfo: LoadText(__dirname + '/api-userCarAssign/get-all-user-car-assign-info.sql'),
+        addNewAssignInfo: LoadText(__dirname + '/api-userCarAssign/add-new-assign-info.sql')
     },
     USERCARASSIGNMESSAGE: {
         saveMessage: LoadText(__dirname + '/api-userCarAssignMessage/save-message.sql')

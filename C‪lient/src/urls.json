@@ -11,7 +11,8 @@
         "Dashboard": "/admin/dashboard",
         "Car":"/admin/car",
         "Products":"/admin/products",
-        "User":"/admin/user"
+        "User":"/admin/user",
+        "Assign":"/admin/assign"
     },
     "PaymentResult":"/paymentResult",
     "UserProfile":"/userProfile",

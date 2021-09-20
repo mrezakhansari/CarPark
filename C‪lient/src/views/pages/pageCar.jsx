@@ -69,13 +69,14 @@ const CarPage = (props) => {
 
     const createDataModelForDataTabel = (data) => {
         return data.map(item => {
-            return { ...item, key: item.id }
+            return { ...item, key: item.ID }
         })
     }
 
     const loadCarInfo = () => {
         carService.getAllCars()
         .then(response => {
+            console.log('asdfasdf',response)
             if (response.data.result) {
                 const data = response.data.data;
                 setState(prevState => {

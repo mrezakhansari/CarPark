@@ -19,6 +19,38 @@ router.post('/getUserCarAssignInfoBasedOnQrCode', async (req, res) => {
 
 });
 
+router.get('/getAllUserCarAssignInfo', async (req, res) => {
+    try {
+        console.log('asdfasdfa');
+        const db = sworm.db(setting.db.sqlConfig.CARALDB);
+        var result = await db.query(queries.USERCARASSIGN.getAllUserCarAssignInfo);
+        SendResponse(req, res, result, (result && result.length > 0))
+    } catch (error) {
+        return SendResponse(req, res, `getAllUserCarAssignInfo`, false, 500);
+    }
+
+});
+
+router.post('/addNewAssignInfo', async (req, res) => {
+    try {
+        const db = sworm.db(setting.db.sqlConfig.CARALDB);
+        var result = await db.query(queries.USERCARASSIGN.addNewAssignInfo,
+            {
+                userId: req.body.userId,
+                carId: req.body.carId,
+                qrCodeId: req.body.qrCodeId,
+                effectiveDate: req.body.effectiveDate,
+                plateNo: req.body.plateNo
+            });
+        console.log('resultttttt', result);
+        SendResponse(req, res, result, (result && result.length > 0))
+    } catch (error) {
+        return SendResponse(req, res, `addNewAssignInfo`, false, 500);
+    }
+
+});
+
+
 router.post('/addNewUserInfo', async (req, res) => {
     try {
         const db = sworm.db(setting.db.sqlConfig.CARALDB);
