@@ -23,7 +23,7 @@ const UserPage = (props) => {
         user: '',
         qrCode: '',
         car: '',
-        effectiveDate: '',
+        //effectiveDate: '',
         plateNo: ''
     }
 
@@ -47,7 +47,7 @@ const UserPage = (props) => {
                     return false;
                 }
             }),
-        effectiveDate: Yup.string().required("تاریخ اعتبار را انتخاب کنید !")
+        //effectiveDate: Yup.string().required("تاریخ اعتبار را انتخاب کنید !")
     });
 
     const Columns = [
@@ -71,7 +71,8 @@ const UserPage = (props) => {
                 // <Tag color="geekblue">{
                 //     text
                 // }</Tag>
-                <Plate plateNo={text} />
+                // <Plate plateNo={text} height="7vh" width="14vw" fontSize="1.5vw" />
+                <Plate plateNo={text} height="100%" width="100%" fontSize="1.1em" />
             ),
             width: '9.5vw'
         },
@@ -234,7 +235,7 @@ const UserPage = (props) => {
         const parameters = {
             carId: values.car.value,
             userId: values.user.value,
-            effectiveDate: values.effectiveDate,
+            //effectiveDate: values.effectiveDate,
             qrCodeId: values.qrCode.value,
             plateNo: `${values.plateNo.firstPart}${values.plateNo.secondPart}${values.plateNo.thirdPart}${values.plateNo.forthPart}`
         }
@@ -285,11 +286,14 @@ const UserPage = (props) => {
                             <Row className="justify-content-md-center">
                                 <Col md="12">
                                     <Table
+                                    
+                                    style={{ width: '100%', height: '100%' }}
                                         className={antdClass2}
+                                        rowClassName={antdClass2}
                                         columns={Columns}
                                         dataSource={state.assignsListForGrid}
                                         pagination={false}
-                                        scroll={{ x: 'max-content', y: 600 }}
+                                        scroll={{ x: '70vw', y: '57vh' }}
                                     />
                                 </Col>
                             </Row>
@@ -380,8 +384,7 @@ const UserPage = (props) => {
                                                 />
                                             </Col>
                                         </Row>
-                                        <Row>
-
+                                        {/* <Row>
                                             <Col md="12" className={"ltr"}>
                                                 <FormikControl
                                                     control="customDateTimePicker"
@@ -391,7 +394,7 @@ const UserPage = (props) => {
                                                     label="تاریخ اعتبار"
                                                 />
                                             </Col>
-                                        </Row>
+                                        </Row> */}
                                         <Row>
                                             <Col md="12" className={"ltr"}>
                                                 <FormikControl

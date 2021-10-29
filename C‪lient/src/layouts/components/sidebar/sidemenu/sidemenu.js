@@ -40,8 +40,9 @@ class SideMenuContent extends Component {
 
     else {
       const user = auth.getCurrentUser();
-      // console.log(user);
+      this.setState({ menuList: menuList, user: user });
 
+      return;
       if (user["http://schemas.microsoft.com/ws/2008/06/identity/claims/role"] && user["http://schemas.microsoft.com/ws/2008/06/identity/claims/role"] === "Admin") {
         this.setState({ menuList: menuList, user: user });
         return;
@@ -162,7 +163,7 @@ class SideMenuContent extends Component {
             style={{ color: "White", fontSize: 18 }}
             className="mr-3 text-right"
             show={this.state.showUserInfo}
-            text={"ادمین سایت خوش آمدید"}
+            text={`${this.state.user.firstName} خوش آمدید`}
           ></ReactRevealText>}
         >
         </SideMenu.MenuMultiItems>

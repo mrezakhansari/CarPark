@@ -9,57 +9,38 @@ import MainLayout from "../mainLayout";
 
 const MainLayoutRoute = ({ location, path, render, ...rest }) => {
 
-   const doesCurrentUserHaveAuthorization = (permissions) => {
-
-       //console.log('from main route: doesCurrentUserHaveAuthorization', permissions, path);
-      if (permissions === null || permissions.length === 0)
-         return false;
-
-      const route = _(path)
-         .split("/")
-         .value()
-         .filter((c) => c !== "")
-         .map((c) => _.toUpper(c)).join('-');
-
-      if (route.length === 0) return true;
-
-      const result = permissions.filter(c => c.name === route && c.isGranted);
-      if (result.length === 1) {
-         return true;
-      }
-
-      return false;
-   }
    const handleRenderMethod = (matchProps) => {
 
       if (!config.useAuthentication) {
          return <MainLayout>{render(matchProps)}</MainLayout>
       }
 
-      //return (<MainLayout>{render(matchProps)}</MainLayout>);
-
       const user = auth.getCurrentUser();
       if (user) {
+         
          return <MainLayout>{render(matchProps)}</MainLayout>
-         if (user["http://schemas.xmlsoap.org/ws/2005/05/identity/claims/role"] && user["http://schemas.xmlsoap.org/ws/2005/05/identity/claims/role"] === "Admin") {
+
+         if (user.userType === "Admin" || user.userType === "Superuser") {
             return <MainLayout>{render(matchProps)}</MainLayout>
          }
-         else if (doesCurrentUserHaveAuthorization(user.permissions)) {
-            return <MainLayout>{render(matchProps)}</MainLayout>
-         }
+         // else if (doesCurrentUserHaveAuthorization(user.permissions)) {
+         //    return <MainLayout>{render(matchProps)}</MainLayout>
+         // }
          else {
+            //console.log('main rout', user)
             auth.logout();
             return (<Redirect
                to={{
-                  pathname: "/",
+                  pathname: "/login",
                   state: { message: "Access to this section is forbidden" }
                }}
             />)
          }
+
       }
       return (<Redirect
          to={{
-            pathname: "/firstPage",
+            pathname: "/login",
             state: { from: matchProps.location }
          }}
       />)

@@ -39,7 +39,7 @@ router.post('/addNewAssignInfo', async (req, res) => {
                 userId: req.body.userId,
                 carId: req.body.carId,
                 qrCodeId: req.body.qrCodeId,
-                effectiveDate: req.body.effectiveDate,
+               // effectiveDate: req.body.effectiveDate,
                 plateNo: req.body.plateNo
             });
         console.log('resultttttt', result);

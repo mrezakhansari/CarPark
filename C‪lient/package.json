@@ -35,6 +35,7 @@
       "react-chartist": "^0.13.1",
       "react-chartjs-2": "^2.7.4",
       "react-client-captcha": "^1.0.3",
+      "react-countdown-circle-timer": "^2.5.4",
       "react-country-flag": "^1.0.1",
       "react-datetime": "^3.0.4",
       "react-dom": "^16.6.0",

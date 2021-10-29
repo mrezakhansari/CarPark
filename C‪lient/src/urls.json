@@ -1,22 +1,14 @@
 {
-    "MapTracking": "/mapTracking",
-    "OnlineTracking" : "/onlineTracking",
-    "Finance":"/finance",
     "Auth": {
         "Logout": "/logout",
         "Login": "/login"
     },
     "Admin": {
-        "Users": "/admin/users",
-        "Dashboard": "/admin/dashboard",
-        "Car":"/admin/car",
-        "Products":"/admin/products",
-        "User":"/admin/user",
-        "Assign":"/admin/assign"
+        "Car": "/admin/car",
+        "User": "/admin/user",
+        "Assign": "/admin/assign"
     },
-    "PaymentResult":"/paymentResult",
-    "UserProfile":"/userProfile",
     "Home": "/",
-    "Code":"/code/:id",
-    "RegisterDriver":"/registerDriver"
+    "Code": "/code/:id",
+    "RegisterDriver": "/registerDriver"
 }

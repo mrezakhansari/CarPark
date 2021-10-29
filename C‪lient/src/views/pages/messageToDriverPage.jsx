@@ -246,9 +246,10 @@ const MessageToDriverPage = (props) => {
                     fontWeight: "bold",
                   }}
                 >
-                  <ReactRevealText show={show}>
+                  کارال سامانه فراخوان راننده
+                  {/* <ReactRevealText show={show}>
                     کارال سامانه فراخوان راننده
-                  </ReactRevealText>
+                  </ReactRevealText> */}
                 </h2>
                 {state.visibleDriverInfo && (
                   <Row>
@@ -305,7 +306,9 @@ const MessageToDriverPage = (props) => {
                       ></MinimalStatisticsBG>
                     </Col>
                     <Col md="12">
-                      <Plate plateNo={state.driverInfo.PlateNo} />
+                    <Plate plateNo={state.driverInfo.PlateNo} height="100%" 
+                    width="100%" 
+                    fontSize="2.5em"/>
                     </Col>
                     <Col className="mt-2" md="12">
                       <Button

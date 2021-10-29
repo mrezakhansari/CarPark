@@ -19,7 +19,7 @@ exports.SendResponse = (req, res, data, result = true, code = 200) => {
     req.body.data = data;
     delete req.body.from;
     const a = req.user ? this.GenerateAuthToken(req.user) : null;
-     //console.log('send res',a)
+    //console.log('send res',a)
     //console.log('toke is:', a);
     Log({ type: result ? 'info' : 'error', res: req.body })
 
@@ -33,14 +33,13 @@ exports.SendResponse = (req, res, data, result = true, code = 200) => {
 
 exports.GenerateAuthToken = (user) => {
     const token = jwt.sign({
-        _id: user._id,
-        lastName: user.lastName,
-        firstName: user.firstName,
-        permissions: user.permissions,
-        area: user.area,
-        userType: user.userType
+        id: user.ID,
+        firstName: user.FirstName,
+        lastName: user.LastName,
+        mobileNo: user.MobileNo,
+        userType: user.UserTypeName
     }, jwtSecret, { expiresIn: jwtExpireTime });
-
+//console.log("token",user)
     const tokenCrypted = AES.encrypt(
         token,
         tokenHashKey

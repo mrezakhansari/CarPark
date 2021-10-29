@@ -3,13 +3,15 @@ const jwt = require('jsonwebtoken');
 const AES = require('crypto-js/aes');
 const { SendResponse } = require('../util/utility')
 const CryptoJs = require('crypto-js');
-const Users = require('../models/users.model');
+const setting = require('../app-setting')
+const sworm = require('sworm');
+const queries = require('../util/T-SQL/queries')
 
 
 module.exports = async (req, res, next) => {
     if (!requiresAuth) return next();
     const encryptedToken = req.headers['x-auth-token'];
-    console.log('auth middleware' ,req.body);
+    console.log('auth middleware', req.body);
     if (!encryptedToken) return SendResponse(req, res, "Access denied, corrupted data", false, 403);
     try {
         let token = AES.decrypt(encryptedToken, tokenHashKey).toString(CryptoJs.enc.Utf8)
@@ -24,10 +26,17 @@ module.exports = async (req, res, next) => {
             }
             else {
                 console.log('auth decode', decoded);
-                let userInfo = await Users.findOne({ _id: decoded._id });
-                if (!userInfo.isActive)
-                    return SendResponse(req, res, "The user account is inactive", false, 200);
-                req.user = userInfo;
+                const db = sworm.db(setting.db.sqlConfig.CARALDB);
+                var user = await db.query(queries.USER.getUserInfoById,
+                    {
+                        id: decoded.id
+                    });
+
+                    if (!user && user.length === 1) {
+                        return SendResponse(req, res, "Incorret Username or Password", false, 200);
+                    }
+                    console.log('auth use get',  user[0])
+                req.user = user[0];
                 next();
             }
         })

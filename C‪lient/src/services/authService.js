@@ -1,42 +1,39 @@
 import http from "./httpService";
 import { toast } from "react-toastify";
 import jwtDecode from "jwt-decode";
+import * as CryptoJS from "crypto-js";
 
-import { apiUrl } from "../config.json";
+import { apiUrl, tokenHashKey } from "../config.json";
 
-
-const apiEndpoint = apiUrl + "/TokenAuth/Authenticate";
+const apiEndpoint = apiUrl + "/auth";
 const tokenKey = "token";
 
 
 toast.configure({ bodyClassName: "rtl" });
 
 export async function login(user) {
-  console.log(apiEndpoint,user)
-  const { data,success } = await http.post(apiEndpoint, user);
-  console.log("from authserv", data)
-  if (data.result && data.success) {
-    const jwt = data.result.accessToken;
+  const { data } = await http.post(apiEndpoint, user);
+  //console.log("from authserv", data)
+  if (data.result) {
+    const jwt = data.data[0].token;
     localStorage.setItem(tokenKey, jwt);
     return { result: true, message: null };
   }
-  return { result: false, message: data.error };
+  return { result: false, message: data.data[0] };
 }
 
 export function logout() {
-  console.log('logoutttt')
   localStorage.removeItem(tokenKey);
 }
 
 export function getCurrentUser() {
   try {
-    // const jwt = CryptoJS.AES.decrypt(
-    //   localStorage.getItem("token"),
-    //   tokenHashKey
-    // ).toString(CryptoJS.enc.Utf8);
-    const jwt =  localStorage.getItem("token");
+    const jwt = CryptoJS.AES.decrypt(
+      localStorage.getItem("token"),
+      tokenHashKey
+    ).toString(CryptoJS.enc.Utf8);
     const decToken = jwtDecode(jwt);
-     console.log('decode toke', decToken);
+    // console.log('decode toke', decToken);
     if (decToken.exp < Date.now() / 1000) {
       toast.error("Your credential is expired, Please login again");
       logout();

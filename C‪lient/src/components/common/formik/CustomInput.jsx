@@ -79,6 +79,7 @@ const CustomInput = (props) => {
                 onChange={(e) => onChange(e, form)}
                 placeholder={placeholder}
                 className={classN}
+                autoComplete="off"
               />
               {meta.touched && meta.error ? (
                 <div className="error">{meta.error}</div>

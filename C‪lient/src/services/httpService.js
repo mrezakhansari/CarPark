@@ -13,7 +13,7 @@ axios.interceptors.response.use(res => {
 
 axios.interceptors.request.use(req => {
   //console.log('set http jewt', localStorage.getItem('token'))
-  req.headers.common['Authorization'] = 'Bearer ' + localStorage.getItem('token');
+  req.headers.common['x-auth-token'] = localStorage.getItem('token');
   return req
 })
 
@@ -27,28 +27,27 @@ axios.interceptors.response.use(null, error => {
   //console.log("error", error);
   if (!expectedError) {
     // status code 500
-    if (error.response.data.error.message === "Imei exist") {
-      toast.error("error");
-    }
-    else {toast.error("خطا در برقراری ارتباط با سرور. لطفا با ادمین سایت تماس بگیرید");}
-    console.log(error.response, error); // eeno bayad log begirim
+    toast.error("Error in connecting to the server, Call to the Administrator");
+    //console.log(error.response, error); // eeno bayad log begirim
     //toastr.error('Server Error','An Unexpected error occured!')
   }
 
   if (expectedError) {
+    //console.log(error.response);
+    const message = error.response.data.data && error.response.data.data.length > 0 ? error.response.data.data[0] : null;
     switch (error.response.status) {
 
       case 400:
-        toast.error('اطلاعات وارد شده صحیح نمی باشد');
+        message !== null ? toast.error(message) : toast.error("Input data is not valid");
         break;
       case 401:
-        toast.error('کاربری با مشخصات وارد شده یافت نشد');
+        message !== null ? toast.error(message) : toast.error("User not found");
         break;
       case 403:
-        toast.error('دسترسی غیر مجاز');
+        message !== null ? toast.error(message) : toast.error("Access to this section is forbidden");
         break;
       case 404:
-        toast.error('سرویس مورد نظر یافت نشد');
+        message !== null ? toast.error(message) : toast.error("The required services has not been found");
         break;
     }
   }

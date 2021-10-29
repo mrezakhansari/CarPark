@@ -1,6 +1,6 @@
 
   
-  .ant-table-tbody > tr > td {
+  /* .ant-table-tbody > tr > td {
     height: 4vh;
     padding: 1px;
     text-align: center;
@@ -8,6 +8,21 @@
   .ant-table-thead > tr > th {
     height: 4vh;
     padding: 2px;
+    text-align: center !important;
+  }
+   */
+
+   .ant-table-tbody > tr > td {
+    height: 5vh;
+    padding: 1px;
+    text-align: center;
+    /* height: calc(1000000vh - 20em); */
+    /* min-height: auto;
+    max-height: 'auto'; */
+  }
+  .ant-table-thead > tr > th {
+    height: 7vh;
+    padding: 1vh 1vw;
     text-align: center !important;
   }
   

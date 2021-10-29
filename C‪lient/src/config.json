@@ -1,7 +1,8 @@
 {
-    "apiUrls": "http://localhost:4200/api",
-    "apiUrl": "http://localhost:4200/api", 
+    "apiUrls": "http://185.105.239.58:8085/api",
+    "apiUrl": "http://185.105.239.58:8085/api", 
     "tokenHashKey": "8c10%$#f9be0b053082",
-    "useAuthentication": false,
-    "socketAddress":"http://localhost:4200/signalr"
+    "useAuthentication": true,
+    "socketAddress":"http://185.105.239.58:8085/signalr",
+    "appName":"کارال (سامانه فراخوان راننده)"
 }

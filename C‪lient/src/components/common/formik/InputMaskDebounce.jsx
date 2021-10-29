@@ -71,6 +71,7 @@ class InputMaskDebounce extends Component {
                   placeholder={placeholder}
                   className={classN}
                   defaultValue={defaultValue}
+                  autoComplete="off"
                 />
                 {meta.touched && (meta.error) ? (
                   <div className="error">{meta.error}</div>

@@ -165,9 +165,7 @@ const RegisterDriverPage = (props) => {
                                         fontWeight: "bold",
                                     }}
                                 >
-                                    <ReactRevealText show={show}>
-                                        کارال سامانه فراخوان راننده
-                                    </ReactRevealText>
+                                     کارال سامانه فراخوان راننده
                                 </h2>
                                 <Row>
                                     <Col md="12">

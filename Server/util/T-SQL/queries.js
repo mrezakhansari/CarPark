@@ -6,11 +6,13 @@ module.exports = {
         getAllUsersFromBcts: LoadText(__dirname + '/user/get-all-users-from-bcts.sql'),
         getAllUsers: LoadText(__dirname + '/api-user/get-all-users.sql'),
         getUserTypes: LoadText(__dirname + '/api-user/get-user-types.sql'),
+        getUserTypesForMarketer: LoadText(__dirname + '/api-user/get-user-types-for-marketer.sql'),
         getUserInfoById: LoadText(__dirname + '/api-user/get-user-info-by-id.sql'),
         addNewUserInfo: LoadText(__dirname + '/api-user/add-new-user-info.sql'),
         addNewUserInfoFull: LoadText(__dirname + '/api-user/add-new-user-info-full.sql'),
         updateUserInfo: LoadText(__dirname + '/api-user/update-user-info.sql'),
         deleteUserInfo: LoadText(__dirname + '/api-user/delete-user-info.sql'),
+        getUserInfoByUserCode: LoadText(__dirname + '/api-user/get-user-info-by-user-code.sql')
     },
     DRIVER: {
         registerDriver: LoadText(__dirname + '/api-register/register-driver.sql'),

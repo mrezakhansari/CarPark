@@ -23,7 +23,10 @@ class Plate extends Component {
             first:first,
             second:seocnd,
             third:third,
-            forth:forth
+            forth:forth,
+            width:this.props.width,
+            height:this.props.height,
+            fontSize:this.props.fontSize
         }
     }
 
@@ -34,18 +37,20 @@ class Plate extends Component {
             <header>
                 <div className="head-text">
                     <div className="head-image">
-                        <img src={plateNoPNG} alt="plateNo" style={{ width: "100%", height: "100%" }} />
+                        <img src={plateNoPNG} alt="plateNo" style={{ width: this.state.width, height: this.state.height }} />
                     </div>
-                    <div className="text-on-image" style={{ fontWeight: "bold", fontSize: "1.5vw", direction: "rtl",marginTop:"0.5rem" }}>
+                    <div className="text-on-image row" style={{ fontWeight: "bold",
+                     fontSize: this.state.fontSize, 
+                     direction: "rtl",marginTop:"0.5rem" }}>
                         {/* <span className="ml-3">{this.state.plateNo[2]}</span>
                         <span className="ml-4">{this.state.plateNo[3]}</span>
                         <span className="ml-3">{this.dict[this.state.plateNo[1]]}</span>
                         <span>{this.state.plateNo[0]}</span> */}
-
-                        <span className="ml-4">{this.state.third}</span>
-                        <span className="ml-3">{this.state.forth}</span>
-                        <span className="ml-3">{this.state.second}</span>
-                        <span>{this.state.first}</span>
+                       
+                        <div className="col-sx-3 ml-5">{this.state.forth}</div>
+                        <div className="col-sx-4 ml-3">{this.state.third}</div>
+                        <div className="col-sx-2 ml-3">{this.state.second}</div>
+                        <div className="col-sx-3 ml-3">{this.state.first}</div>
                     </div>
                 </div>
             </header>

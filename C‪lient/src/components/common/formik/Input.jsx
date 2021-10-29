@@ -8,8 +8,8 @@ const Input = (props) => {
   const classN = "form-control " + className;
   return (
     <FormGroup>
-      {label !== null && label !== "" && <Label for={name}>{label}</Label>}
-      <Field id={name} name={name} {...rest} className={classN} />
+      {label !== null && label !== "" && <Label for={name} style={{color:'black'}}>{label}</Label>}
+      <Field id={name} name={name} {...rest} className={classN} autoComplete="off" />
       <ErrorMessage name={name} component={TextError} />
     </FormGroup>
   );

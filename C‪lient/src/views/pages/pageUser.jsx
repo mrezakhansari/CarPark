@@ -8,6 +8,7 @@ import * as userService from '../../services/user';
 import { Formik, Form } from "formik";
 import FormikControl from "../../components/common/formik/FormikControl";
 import * as Yup from 'yup';
+import * as auth from '../../services/authService';
 
 toast.configure({ bodyClassName: "customFont" });
 
@@ -19,21 +20,20 @@ const UserPage = (props) => {
         firstName: '',
         lastName: '',
         mobileNo: '',
-        email: '',
+        //email: '',
         userType: '',
-        password: '',
-        userCode: '',
-        address: '',
-        color:''
+        //address: ''
     }
 
     const CreateUserValidationSchema = Yup.object({
         firstName: Yup.string().required("نام کاربر را وارد کنید !"),
         lastName: Yup.string().required("نام خانوادگی کاربر را وارد کنید !"),
         mobileNo: Yup.string().required("شماره موبایل را وارد کنید !"),
-        userType: Yup.object().required("نوع کاربری را وارد کنید !"),
-        email:Yup.string().email("آدرس ایمیل را درست وارد کنید !"),
-        color: Yup.string().required("رنگ خودرو را وارد کنید !"),
+        // userType: Yup.object().required("نوع کاربری را وارد کنید !").test('usertype','نوع کاربری را وارد کنید',(value)=>{
+        //     if (state.userLogined.userType !=="Admin") return true;
+        //     else return false;
+        // }),
+        //email: Yup.string().email("آدرس ایمیل را درست وارد کنید !")
     });
 
     const Columns = [
@@ -73,12 +73,6 @@ const UserPage = (props) => {
             width: '7vw'
         },
         {
-            title: 'کلمه عبور',
-            dataIndex: 'Password',
-            key: 'password',
-            width: '7vw'
-        },
-        {
             title: 'آدرس',
             dataIndex: 'Address',
             key: 'address',
@@ -92,6 +86,7 @@ const UserPage = (props) => {
         currentUser: {},
         createUserInfoModal: false,
         userTypesList: [],
+        userLogined: {}
     });
 
     const createDataModelForDataTabel = (data) => {
@@ -142,6 +137,13 @@ const UserPage = (props) => {
     useEffect(() => {
         loadUsersInfo();
         loadUserTypesInfo();
+        const user = auth.getCurrentUser();
+        setState(prevState => {
+            return {
+                ...prevState,
+                userLogined: user
+            }
+        })
     }, [])
 
     //#endregion ---------------------------------------------------------
@@ -168,9 +170,12 @@ const UserPage = (props) => {
     }
 
     const handleSubmitCreateUserInfo = (values) => {
-        const temp = _.pick(values, ["firstName", "lastName", "email", "mobileNo", "address", "userCode", "password"]);
-        const parameters = {...temp,userType:values.userType.value}
-        console.log(parameters);
+        const temp = _.pick(values, ["firstName", "lastName", "mobileNo", "userCode"]);
+        let parameters = { ...temp, userType: 3, userCode: values.mobileNo, password: "", address: "", email: "" }
+        if (state.userLogined.userType === "Admin") {
+            parameters = { ...parameters, userType: values.userType.value }
+        }
+        //       console.log(parameters);
         userService.addNewUserInfoFull(parameters)
             .then(response => {
                 if (response.data.result) {
@@ -250,7 +255,7 @@ const UserPage = (props) => {
                         enableReinitialize
                     >
                         {(formik) => {
-                            ////console.log("Formik props values", formik);
+                            console.log("Formik props values", state.userLogined);
 
                             return (
                                 <React.Fragment>
@@ -281,7 +286,7 @@ const UserPage = (props) => {
 
                                         </Row>
                                         <Row>
-                                            <Col md="6">
+                                            {/* <Col md="6">
                                                 <FormikControl
                                                     control="input"
                                                     type="email"
@@ -291,8 +296,8 @@ const UserPage = (props) => {
                                                     //placeholder="آدرس ایمیل"
                                                     label="آدرس ایمیل"
                                                 />
-                                            </Col>
-                                            <Col md="6">
+                                            </Col> */}
+                                            <Col md="12">
                                                 <FormikControl
                                                     control="inputMaskDebounce"
                                                     mask="09999999999"
@@ -305,19 +310,8 @@ const UserPage = (props) => {
                                                 />
                                             </Col>
                                         </Row>
-                                        <Row>
-                                            <Col md="6">
-                                                <FormikControl
-                                                    control="input"
-                                                    type="text"
-                                                    name="color"
-                                                    id="color"
-                                                    className="rtl"
-                                                    label="رنگ خودرو"
-                                                    placeholder="رنگ خودرو"
-                                                />
-                                            </Col>
-                                            <Col md="6">
+                                        {state && state.userLogined.userType === "Admin" && <Row>
+                                            <Col md="12">
                                                 <FormikControl
                                                     control="customSelect"
                                                     name="userType"
@@ -334,32 +328,8 @@ const UserPage = (props) => {
                                                     label="کاربری"
                                                 />
                                             </Col>
-                                        </Row>
-                                        <Row>
-                                            <Col md="6">
-                                                <FormikControl
-                                                    control="input"
-                                                    type="text"
-                                                    name="userCode"
-                                                    id="userCode"
-                                                    className="ltr"
-                                                    //placeholder="نام کاربری"
-                                                    label="نام کاربری"
-                                                />
-                                            </Col>
-                                            <Col md="6">
-                                                <FormikControl
-                                                    control="input"
-                                                    type="text"
-                                                    name="password"
-                                                    id="password"
-                                                    className="ltr"
-                                                    //placeholder="کلمه عبور"
-                                                    label="کلمه عبور"
-                                                />
-                                            </Col>
-                                        </Row>
-                                        <Row>
+                                        </Row>}
+                                        {/* <Row>
                                             <Col>
                                                 <FormikControl
                                                     control="input"
@@ -371,7 +341,7 @@ const UserPage = (props) => {
                                                     label="آدرس"
                                                 />
                                             </Col>
-                                        </Row>
+                                        </Row> */}
                                         <div className="form-actions center">
                                             <Button color="primary" type="submit" className="ml-1" disabled={!formik.isValid}>
                                                 {/* <LogIn size={16} color="#FFF" />  */}

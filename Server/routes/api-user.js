@@ -9,12 +9,21 @@ const { DoesUserHavePermission } = require('../util/CheckPermission');
 const md5 = require('md5');
 
 
-router.get('/getUserTypes', async (req, res) => {
+router.get('/getUserTypes', auth, async (req, res) => {
     try {
         const db = sworm.db(setting.db.sqlConfig.CARALDB);
-        var result = await db.query(queries.USER.getUserTypes);
-        console.log("ressfasfasdfasdf", result);
-        SendResponse(req, res, result, (result && result.length > 0))
+        console.log('qweqweqweqwe',req.user,req.user.UserTypeName);
+        if (req.user.UserTypeName !== "Admin"){
+            var result = await db.query(queries.USER.getUserTypesForMarketer);
+            console.log("getUserTypesqweqwe", result);
+            SendResponse(req, res, result, (result && result.length > 0))
+        }
+        else{
+            var result = await db.query(queries.USER.getUserTypes);
+            console.log("getUserTypes", result);
+            SendResponse(req, res, result, (result && result.length > 0))
+        }
+       
     } catch (error) {
         console.log(error)
         return SendResponse(req, res, `getUserTypes`, false, 500);
@@ -22,11 +31,11 @@ router.get('/getUserTypes', async (req, res) => {
 
 });
 
-router.get('/getAllUsers', async (req, res) => {
+router.get('/getAllUsers', auth, async (req, res) => {
     try {
         const db = sworm.db(setting.db.sqlConfig.CARALDB);
         var result = await db.query(queries.USER.getAllUsers);
-        console.log("ressfasfasdfasdf", result);
+        //  console.log("ressfasfasdfasdf", result);
         SendResponse(req, res, result, (result && result.length > 0))
     } catch (error) {
         console.log(error)
@@ -35,8 +44,9 @@ router.get('/getAllUsers', async (req, res) => {
 
 });
 
-router.post('/addNewUserInfoFull', async (req, res) => {
+router.post('/addNewUserInfoFull', auth, async (req, res) => {
     try {
+        console.log("asdfasdfasdfasdf", req.user);
         const db = sworm.db(setting.db.sqlConfig.CARALDB);
         var result = await db.query(queries.USER.addNewUserInfoFull,
             {
@@ -47,7 +57,8 @@ router.post('/addNewUserInfoFull', async (req, res) => {
                 mobileNo: req.body.mobileNo,
                 address: req.body.address,
                 userCode: req.body.userCode,
-                userType:req.body.userType
+                userType: req.body.userType,
+                id: req.user.ID
             });
 
         let data = result[0]['OutVal'] !== false ?

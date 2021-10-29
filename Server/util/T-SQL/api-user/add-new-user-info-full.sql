@@ -6,4 +6,5 @@ exec sp_AddNewUserInfo
 	@UserType_ID = @userType,
 	@Password = @password,
 	@UserCode = @userCode,
-	@Address = @address
+	@Address = @address,
+	@CreateUserID = @id
