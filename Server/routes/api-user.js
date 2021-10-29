@@ -7,23 +7,25 @@ const sworm = require('sworm');
 const auth = require('../middleware/auth');
 const { DoesUserHavePermission } = require('../util/CheckPermission');
 const md5 = require('md5');
+var Kavenegar = require('kavenegar');
+
+var api = Kavenegar.KavenegarApi({ apikey: '63416D79483430636F3154443370535158556E6F4139792B364D6A61695762436E357A557471695874486F3D' });
 
 
 router.get('/getUserTypes', auth, async (req, res) => {
     try {
         const db = sworm.db(setting.db.sqlConfig.CARALDB);
-        console.log('qweqweqweqwe',req.user,req.user.UserTypeName);
-        if (req.user.UserTypeName !== "Admin"){
+        if (req.user.UserTypeName !== "Admin") {
             var result = await db.query(queries.USER.getUserTypesForMarketer);
-            console.log("getUserTypesqweqwe", result);
+            console.log("ressfasfasdfasdf", result);
             SendResponse(req, res, result, (result && result.length > 0))
         }
-        else{
+        else {
             var result = await db.query(queries.USER.getUserTypes);
-            console.log("getUserTypes", result);
+            console.log("ressfasfasdfasdf", result);
             SendResponse(req, res, result, (result && result.length > 0))
         }
-       
+
     } catch (error) {
         console.log(error)
         return SendResponse(req, res, `getUserTypes`, false, 500);
@@ -65,12 +67,14 @@ router.post('/addNewUserInfoFull', auth, async (req, res) => {
             "The operation has been done successfully" :
             "Operation failed";
 
+        api.VerifyLookup({ token: req.body.lastName, receptor: req.body.mobileNo, template: `template6`, type: "sms" }, function (er) {
+            console.log(er)
+        })
         return SendResponse(req, res, data, result[0]['OutVal'] !== false);
     } catch (error) {
         console.log(error)
         return SendResponse(req, res, `addNewUserInfoFull`, false, 500);
     }
-
 });
 
 router.post('/addNewUserInfo', async (req, res) => {

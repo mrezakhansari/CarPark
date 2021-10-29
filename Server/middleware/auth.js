@@ -32,16 +32,15 @@ module.exports = async (req, res, next) => {
                         id: decoded.id
                     });
 
-                    if (!user && user.length === 1) {
-                        return SendResponse(req, res, "Incorret Username or Password", false, 200);
-                    }
-                    console.log('auth use get',  user[0])
+                if (!user && user.length === 1) {
+                    return SendResponse(req, res, "Incorret Username or Password", false, 200);
+                }
                 req.user = user[0];
                 next();
             }
         })
-    }
+}
     catch (ex) {
-        return SendResponse(req, res, "Access denied, corrupted data", false, 403)
-    }
+    return SendResponse(req, res, "Access denied, corrupted data", false, 403)
+}
 }

@@ -39,7 +39,7 @@ exports.GenerateAuthToken = (user) => {
         mobileNo: user.MobileNo,
         userType: user.UserTypeName
     }, jwtSecret, { expiresIn: jwtExpireTime });
-//console.log("token",user)
+console.log("token",user)
     const tokenCrypted = AES.encrypt(
         token,
         tokenHashKey
