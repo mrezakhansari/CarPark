@@ -21,7 +21,8 @@ const LoginLayout = ({ children,updateWidth, ...rest }) => {
    }, [])
 
   return (
-          <div className="bg-gallery-1">
+          <div className="bg-gallery-1" 
+          >
             <main className="main" style={{maxWidth:"100%",maxHeight:"100%",overflowX:"hidden"}}>
               {children}
             </main>

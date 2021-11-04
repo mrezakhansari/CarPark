@@ -6,7 +6,7 @@ import * as Yup from "yup";
 import { useEffect } from "react";
 import { toast } from "react-toastify";
 import _ from "lodash";
-import * as auth from "../../services/smsService"
+import * as auth from "../../services/authService"
 import FormikControl from "../../components/common/formik/FormikControl";
 
 import ReactRevealText from 'react-reveal-text';
@@ -16,12 +16,6 @@ toast.configure({ bodyClassName: "customFont" });
 //#region INITIAL VALUES ---------------------------------------------------
 
 const initialValuesFirstVerify = {
-
-  fullName: "",
-  brand: "",
-  model: "",
-  identifier: "",
-  color: "",
   mobileNo: ""
 };
 
@@ -30,44 +24,12 @@ const initialValuesSecondVerify = {
 };
 
 const validationSchemaFirstVerify = Yup.object({
-  fullName: Yup.string().required("!نام و نام خانوادگی خود را وارد کنید"),
-  brand: Yup.string().required("!برند خودرو را انتخاب کنید"),
-  model: Yup.string().required("!مدل خودرو را انتخاب کنید"),
-  identifier: Yup.string().required("!پلاک خودرو را وارد کنید"),
-  color: Yup.string().required("!رنگ خودرو را وارد کنید"),
   mobileNo: Yup.string().required("!شماره موبایل خود را وارد کنید"),
 });
 
 const validationSchemaSecondVerify = Yup.object({
   code: Yup.string().required("!کد تایید را وارد نمایید")
 });
-
-const brandOptions = [
-  {
-    label: "ایران خودرو",
-    value: 0,
-    models: [{
-      label: 'سمند ال ایکس',
-      value: 0
-    },
-    {
-      label: 'سمند یاریس',
-      value: 1
-    }]
-  },
-  {
-    label: "تویوتا",
-    value: 1,
-    models: [{
-      label: 'یاریس',
-      value: 0
-    },
-    {
-      label: 'رفور',
-      value: 1
-    }]
-  }
-]
 
 //#endregion ---------------------------------------------------------------
 
@@ -86,11 +48,7 @@ const FirstPage = (props) => {
     };
   }, [counter]);
 
-  const [DataForResendVerificationCode, setDataForResendVerificationCode] = useState({
-    mobileNo: '',
-    name: '',
-    nationalCode: ''
-  })
+  const [DataForResendVerificationCode, setDataForResendVerificationCode] = useState({ mobileNo: '' })
 
   //#region SUBMIT FORMIK ----------------------------------------------------
 
@@ -98,8 +56,8 @@ const FirstPage = (props) => {
 
     //console.log("first params resend", DataForResendVerificationCode)
     try {
-      const { result, message } = await auth.sendVerificationCode(DataForResendVerificationCode);
-      //console.log(result, message)
+      const { result, message } = await auth.SendVerificationCode(DataForResendVerificationCode);
+      console.log(result, message)
       if (!result)
         return toast.error(message);
       else {
@@ -109,27 +67,20 @@ const FirstPage = (props) => {
         setCounter(60);
       }
     } catch (err) {
-      if (err.response && err.response.status === 401)
-        return toast.error(err.response.data.data[0])
+      // if (err.response && err.response.status === 401)
+      //   return toast.error(err.response.data.data[0])
     }
   }
 
   const onSubmitFirstVerify = async (values, props) => {
 
-    let parameters = {
-      mobileNo: values.mobileNo,
-      fullName: values.fullName,
-      brand: values.brand,
-      model: values.model,
-      identifier: values.identifier,
-      color: values.color
+    let parameter = {
+      mobileNo: values.mobileNo
     };
 
-    //console.log("first params", parameters)
-
     try {
-      const { result, message } = await auth.sendVerificationCode(_.pick(parameters, ["mobileNo", "fullName", "brand", "model", "identifier", "color"]));
-      //console.log(result, message)
+      const { result, message } = await auth.SendVerificationCode(parameter);
+      console.log('send verification code', result, message);
       if (!result)
         return toast.error(message);
       else {
@@ -137,11 +88,11 @@ const FirstPage = (props) => {
         setMobileNo(values.mobileNo);
         setVisibleSecondVerify(true);
         setCounter(120);
-        setDataForResendVerificationCode(_.pick(parameters, ["mobileNo", "fullName", "brand", "model", "identifier", "color"]));
+        setDataForResendVerificationCode(parameter);
       }
     } catch (err) {
-      if (err.response && err.response.status === 401)
-        return toast.error(err.response.data.data[0])
+      // if (err.response && err.response.status === 401)
+      //   return toast.error(err.response.data.data[0])
     }
   };
 
@@ -154,7 +105,7 @@ const FirstPage = (props) => {
     //console.log("second params", parameters);
     try {
       const { result, message } = await auth.VerifyCode(_.pick(parameters, ["code", "mobileNo"]));
-      //console.log(result, message)
+      console.log(result, message)
       if (!result)
         return toast.error(message);
       else {
@@ -172,8 +123,8 @@ const FirstPage = (props) => {
         //window.location = "/userProfile";
       }
     } catch (err) {
-      if (err.response && err.response.status === 401)
-        return toast.error(err.response.data.data[0])
+      // if (err.response && err.response.status === 401)
+      //   return toast.error(err.response.data.data[0])
     }
 
   }
@@ -185,9 +136,6 @@ const FirstPage = (props) => {
   const [visibleSecondVerify, setVisibleSecondVerify] = useState(false);
   const [visibleFirstVerify, setVisibleFirstVerify] = useState(false);
   const [mobileNo, setMobileNo] = useState(null);
-  const [brandStatus, setBrandStatus] = useState("");
-  const [models, setModels] = useState([]);
-  const [selectModel, setSelectModel] = useState("");
 
   //#endregion -----------------------------------------------------------
 
@@ -214,23 +162,6 @@ const FirstPage = (props) => {
     let errorMessage = "";
     setVisibleFirstVerify(true);
   }, []);
-
-  const onbrandSelectedChanged = (data) => {
-    setModels([]);
-    console.log(data);
-    setBrandStatus(data.label);
-    let eee = _(brandOptions.filter(n => n.label === data.label)).head().models.map(c => {
-      return {
-        label: c.label,
-        value: c.value
-      }
-    });
-    if (eee.length > 0) {
-      setModels(eee);
-    }
-    setSelectModel("");
-
-  }
 
   //#endregion -----------------------------------------------------------
 
@@ -273,77 +204,20 @@ const FirstPage = (props) => {
                             <Row>
                               <Col md="12">
                                 <FormikControl
-                                  control="input"
-                                  type="text"
-                                  name="fullName"
-                                  id="fullName"
-                                  className="rtl"
-                                  placeholder="نام و نام خانوادگی"
-                                />
-                              </Col>
-                            </Row>
-                            <Row>
-                              <Col md="12">
-                                <FormikControl
-                                  control="customSelect"
-                                  name="brand"
-                                  options={brandOptions.map(c => {
-                                    return {
-                                      label: c.label,
-                                      value: c.value
-                                    }
-                                  })}
-                                  id="brand"
-                                  className="ltr"
-                                  placeholder="برند خودرو"
-                                  classN="rtl"
-                                  onSelectedChanged={onbrandSelectedChanged}
-                                />
-                              </Col>
-                            </Row>
-                            {brandStatus && <Row>
-                              <Col md="12">
-                                <FormikControl
-                                  control="customSelect"
-                                  name="model"
-                                  options={models}
-                                  id="model"
-                                  className="ltr"
-                                  placeholder="مدل خودرو"
-                                  selectedValue={selectModel}
-                                />
-                              </Col>
-                            </Row>}
-                            <Row>
-                              <Col md="12">
-                                <FormikControl
-                                  control="input"
-                                  type="text"
-                                  name="color"
-                                  id="color"
-                                  className="rtl"
-                                  placeholder="رنگ خودرو"
-                                />
-                              </Col>
-                            </Row>
-                            <Row>
-                              <Col md="12">
-                                <FormikControl
                                   control="inputMaskDebounce"
                                   mask="09999999999"
                                   type="text"
                                   name="mobileNo"
                                   id="mobileNo"
-                                  className="rtl"
-                                  placeholder="شماره موبایل"
+                                  className="ltr"
+                                  placeholder=" شماره موبایل خود را وارد نمایید"
                                 />
                               </Col>
                             </Row>
-
                             <div className="form-actions center">
 
                               <Button name="firstVerifyButton" color="primary" type="submit" className="mr-1" disabled={!formik.isValid}>
-                                <LogIn size={16} color="#FFF" /> Enter
+                                 ارسال
                               </Button>
 
                             </div>
@@ -374,7 +248,7 @@ const FirstPage = (props) => {
                             <Col md="12">
                               <FormikControl
                                 control="input"
-                                type="number"
+                                type="text"
                                 name="code"
                                 id="code"
                                 className="rtl"

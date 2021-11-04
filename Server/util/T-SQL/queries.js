@@ -12,7 +12,9 @@ module.exports = {
         addNewUserInfoFull: LoadText(__dirname + '/api-user/add-new-user-info-full.sql'),
         updateUserInfo: LoadText(__dirname + '/api-user/update-user-info.sql'),
         deleteUserInfo: LoadText(__dirname + '/api-user/delete-user-info.sql'),
-        getUserInfoByUserCode: LoadText(__dirname + '/api-user/get-user-info-by-user-code.sql')
+        getUserInfoByUserCode: LoadText(__dirname + '/api-user/get-user-info-by-user-code.sql'),
+        getUserInfoByPhoneNo: LoadText(__dirname + '/api-user/get-user-info-by-phone-no.sql'),
+        updateUserPasswordInfo:LoadText(__dirname + '/api-user/update-user-password-info.sql')
     },
     DRIVER: {
         registerDriver: LoadText(__dirname + '/api-register/register-driver.sql'),

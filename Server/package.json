@@ -19,6 +19,7 @@
     "kavenegar": "^1.1.4",
     "lodash": "^4.17.21",
     "md5": "^2.2.1",
+    "moment": "^2.29.1",
     "mongoose": "^5.9.23",
     "mssql": "^6.2.1",
     "nodemailer": "^6.6.3",

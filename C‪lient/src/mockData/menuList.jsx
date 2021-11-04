@@ -3,9 +3,9 @@ import { Home, Monitor, LogOut, DollarSign, MapPin } from "react-feather";
 import urls from '../urls.json';
 
 const MenuList = [
-    // {
-    //     name: "پروفایل شما", key: "userProfile", url: urls.UserProfile, icon: () => <Home size={18} />, child: []
-    // },
+    {
+        name: "پروفایل شما", key: "userProfile", url: urls.UserProfile, icon: () => <Home size={18} />, child: []
+    },
     // {
     //     name: "تاریخچه ردیابی", key: "historyTracking", url: urls.MapTracking, icon: () => <MapPin size={18} />, child: []
     // },

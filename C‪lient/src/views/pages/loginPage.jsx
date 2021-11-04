@@ -120,10 +120,10 @@ const LoginPage = (props) => {
         onSubmitProps.setSubmitting(false);
         if (state && state.from)
           return props.history.replace(
-            state && state.from ? state.from.pathname : "/admin/assign",
+            state && state.from ? state.from.pathname : "/userProfile",
             { ...state.from.state }
           );
-        else window.location = "/admin/assign";
+        else window.location = "/userProfile";
       }
     } catch (err) {
       if (err.response && err.response.status === 401)

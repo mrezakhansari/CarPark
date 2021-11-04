@@ -11,7 +11,7 @@ const queries = require('../util/T-SQL/queries')
 module.exports = async (req, res, next) => {
     if (!requiresAuth) return next();
     const encryptedToken = req.headers['x-auth-token'];
-    console.log('auth middleware', req.body);
+    console.log('auth', req.body);
     if (!encryptedToken) return SendResponse(req, res, "Access denied, corrupted data", false, 403);
     try {
         let token = AES.decrypt(encryptedToken, tokenHashKey).toString(CryptoJs.enc.Utf8)
@@ -32,7 +32,7 @@ module.exports = async (req, res, next) => {
                         id: decoded.id
                     });
 
-                if (!user && user.length === 1) {
+                if (!user || user.length < 1) {
                     return SendResponse(req, res, "Incorret Username or Password", false, 200);
                 }
                 req.user = user[0];

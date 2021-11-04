@@ -16,7 +16,7 @@ import { useEffect } from "react";
 import { toast } from "react-toastify";
 import _ from "lodash";
 import * as auth from "../../services/smsService";
-import FormikControl from "../../components/common/formik/FormikControl";
+import CustomPlateReading from "../../components/common/formik/CustomPlateReading";
 
 import ReactRevealText from "react-reveal-text";
 import { getUserCarAssignInfoBasedOnQrCode } from "../../services/userCarAssign";
@@ -29,6 +29,7 @@ import url from '../../urls.json';
 toast.configure({ bodyClassName: "customFont" });
 
 const asd = ["a", "b"];
+const buttonColors = ["#00005c","#4d4dff","#ff9900","#f01f45","#fwsxc5","#0bqaz7","#cdnhbe","#0fdb7p"]
 
 //#region INITIAL VALUES ---------------------------------------------------
 
@@ -117,13 +118,13 @@ const MessageToDriverPage = (props) => {
     //**************************************************************** */
     async function fetchMessageTemplates() {
       try {
-        const temp2 = await getMessageTemplates();
-        console.log("getMessageTemplates", temp2.data);
-        if (temp2.data.result) {
+        const { data } = await getMessageTemplates();
+        console.log("getMessageTemplates", data);
+        if (data.result) {
           setState((prevState) => {
             return {
               ...prevState,
-              messagesList: temp2.data.data,
+              messagesList: data.data,
             };
           });
         }
@@ -294,7 +295,7 @@ const MessageToDriverPage = (props) => {
                               >
                                 رنگ: {state.driverInfo.Color}
                               </span>
-                              
+
                             </div>
                           </React.Fragment>
                         }
@@ -306,9 +307,10 @@ const MessageToDriverPage = (props) => {
                       ></MinimalStatisticsBG>
                     </Col>
                     <Col md="12">
-                    <Plate plateNo={state.driverInfo.PlateNo} height="100%" 
-                    width="100%" 
-                    fontSize="2.5em"/>
+                      {/* <Plate plateNo={state.driverInfo.PlateNo} height="100%"
+                        width="100%"
+                        fontSize="2em" /> */}
+                        <CustomPlateReading plateNo={state.driverInfo.PlateNo}/>
                     </Col>
                     <Col className="mt-2" md="12">
                       <Button
@@ -327,89 +329,41 @@ const MessageToDriverPage = (props) => {
         </Row>
       </div>
 
-      <Modal
-        isOpen={state.editModal}
-        toggle={editToggle}
-        className={props.className + " customFont"}
-        backdrop="static"
+      {state.messagesList &&
+        <Modal
+          isOpen={state.editModal}
+          toggle={editToggle}
+          className={props.className + " customFont customBackgroundColor1"}
+          
+          backdrop="static"
         // dir="rtl"
-      >
-        <ModalHeader toggle={editToggle} className="customFont rtl">
-          ارسال پیغام به راننده
-        </ModalHeader>
-        <ModalBody className="text-center">
-          <Row>
-            <Col md="12">
-              <Button
-                style={{color:"white", backgroundColor:"#0ddb1e"}}
-                onClick={() =>
-                  handleSubmitSendMessageToDriver(
-                    1,
-                    "لطفا اقدام به جابجایی خودرو بفرمایید"
-                  )
-                }
-              >
-                لطفا اقدام به جابجایی خودرو بفرمایید
-              </Button>
-            </Col>
-            <Col md="12">
-              <Button
-                style={{color:"white", backgroundColor:"#f01f45"}}
-                onClick={() =>
-                  handleSubmitSendMessageToDriver(
-                    2,
-                    "لطفا صدای دزدگیر خودرو را قطع نمایید"
-                  )
-                }
-              >
-                لطفا صدای دزدگیر خودرو را قطع نمایید
-              </Button>
-            </Col>
-
-            {/* <Col md="12">
-              <Button
-              style={{color:"white", backgroundColor:"#f01f45"}}
-                onClick={() =>
-                  handleSubmitSendMessageToDriver(3, "خودرو شما تصادف نموده است")
-                }
-              >
-                خودرو شما تصادف نموده است
-              </Button>
-            </Col> */}
-            <Col md="12">
-              <Button
-              style={{color:"white", backgroundColor:"#ff9900"}}
-                onClick={() =>
-                  handleSubmitSendMessageToDriver(4, "خودرو شما دچار نشتی می باشد")
-                }
-              >
-                خودرو شما دچار نشتی می باشد
-              </Button>
-            </Col>
-            <Col md="12">
-              <Button
-              style={{color:"white", backgroundColor:"#4d4dff"}}
-                onClick={() =>
-                  handleSubmitSendMessageToDriver(5, "درب/پنجره خودرو شما باز می باشد")
-                }
-              >
-                درب/پنجره خودرو شما باز می باشد
-              </Button>
-            </Col>
-            {/* <Col md="12">
-              <Button
-              style={{color:"white", backgroundColor:"#00005c"}}
-                onClick={() =>
-                  handleSubmitSendMessageToDriver(7, "در اطراف خودرو شما فعالیت های مشکوکی مشاهده شده")
-                }
-              >
-               در اطراف خودرو شما فعالیت های مشکوکی مشاهده شده
-              </Button>
-            </Col> */}
-          </Row>
-        </ModalBody>
-      </Modal>
-    </React.Fragment>
+        >
+          <ModalHeader toggle={editToggle} className="customFont rtl customBackgroundColor1">
+            ارسال پیغام به راننده
+          </ModalHeader>
+          <ModalBody className="text-center customBackgroundColor1">
+            <Row>
+              {
+                state.messagesList.map((item,index) => 
+                <Col md="12" key={index}>
+                  <Button key={`b${index}`}
+                    style={{ color: "white", backgroundColor: buttonColors[index] }}
+                    onClick={() =>
+                      handleSubmitSendMessageToDriver(
+                        item.ID,
+                        item.Message
+                      )
+                    }
+                  >
+                    {item.Message}
+                  </Button>
+                </Col>)
+              }
+            </Row>
+          </ModalBody>
+        </Modal>}
+     
+    </React.Fragment >
   );
 };
 

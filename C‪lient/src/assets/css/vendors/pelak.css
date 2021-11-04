@@ -1,0 +1,57 @@
+.mainpelak{
+    direction: rtl!important;
+    background: url("../../icons/svg/flag.svg") top/contain no-repeat;
+    height: 90px;
+    max-width: 450px;
+    position: relative;
+    margin: 0 auto;
+}
+.mainpelak .innerpelak{
+    width: 100%;
+}
+.mainpelak .innerpelak div {
+    position: relative;min-height: 1px;padding-right: 0;padding-left: 0;float: right;width: 8%;
+}
+.mainpelak .innerpelak div:nth-of-type(1) {
+    margin-right: 3%;
+}
+.mainpelak .innerpelak div:nth-of-type(2) {
+    margin-right: 1%;
+}
+.mainpelak .innerpelak div:nth-of-type(3) {
+    margin-right: 7%;
+}
+.mainpelak .innerpelak div:nth-of-type(4) {
+    margin-right: 1%;
+}
+.mainpelak .innerpelak div:nth-of-type(5) {
+    margin-right: 1%;
+}
+.mainpelak .innerpelak div:nth-of-type(6) {
+    width: 12%;
+    margin-right: 3%;
+}
+.mainpelak .innerpelak div:nth-of-type(7) {
+    margin-right: 3%;
+}
+.mainpelak .innerpelak div:nth-of-type(8) {
+    margin-right: 1%;
+}
+.mainpelak .innerpelak div input ,.mainpelak .innerpelak div select{
+    background-color: #d3e1df;
+    margin-top: 18px;
+    height: 54px;
+    font-size: 50px;
+    line-height: 1;
+    text-align: center;
+    font: inherit;
+    padding: 0px;
+}
+.enterandpass ,.enterandpass:focus{
+    background-color: white !important;
+    border: none !important;
+    box-shadow: none !important;
+}
+.enterandpass:focus{
+    background-color: #d3e1df !important;
+}

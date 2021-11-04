@@ -8,7 +8,9 @@
         "User": "/admin/user",
         "Assign": "/admin/assign"
     },
-    "Home": "/",
     "Code": "/code/:id",
-    "RegisterDriver": "/registerDriver"
+    "RegisterDriver": "/registerDriver",
+    "UserProfile":"/userProfile",
+    "Home": "/",
+    "FirstPage":"/firstPage"
 }

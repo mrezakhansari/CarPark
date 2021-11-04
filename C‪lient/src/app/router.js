@@ -16,6 +16,8 @@ import urls from '../urls.json';
 const LazyHomePage = lazy(() => import("../../src/views/pages/PageHome"));
 const LazyMessageToDriverPage = lazy(() => import("../views/pages/messageToDriverPage"));
 const LazyRegisterDriverPage = lazy(() => import("../views/pages/registerDriverPage"));
+const LazyFirstPage = lazy(()=>import("../views/pages/firstPage"));
+const LazyUserProfile = lazy(()=>import("../views/pages/userProfile"));
 
 //#endregion --------------------------------------------------------------------------
 
@@ -45,14 +47,33 @@ class Router extends Component {
       // Set the directory path if you are deplying in sub-folder
       <BrowserRouter basename="/">
         <Switch>
-          {/* <MainLayoutRoutes
+        <PageLayoutRoute
+            exact
+            path={urls.FirstPage}
+            render={(matchprops) => (
+              <Suspense fallback={<Spinner />}>
+                <LazyFirstPage {...matchprops} />
+              </Suspense>)}
+          />
+          
+          <MainLayoutRoutes
+            exact
+            path={urls.UserProfile}
+            render={(matchprops) => (
+              <Suspense fallback={<Spinner />}>
+                <LazyUserProfile {...matchprops} />
+              </Suspense>
+            )}
+          />
+
+          <MainLayoutRoutes
             exact
             path={urls.Home}
             render={(matchprops) => (
               <Suspense fallback={<Spinner />}>
-                <LazyHomePage {...matchprops} />
+                <LazyUserProfile {...matchprops} />
               </Suspense>)}
-          /> */}
+          />
           <PageLayoutRoute
             exact
             path={urls.RegisterDriver}
@@ -61,6 +82,17 @@ class Router extends Component {
                 <LazyRegisterDriverPage {...matchprops} />
               </Suspense>)}
           />
+          
+          <MainLayoutRoutes
+            exact
+            path={urls.UserProfile}
+            render={(matchprops) => (
+              <Suspense fallback={<Spinner />}>
+                <LazyUserProfile {...matchprops} />
+              </Suspense>
+            )}
+          />
+
           <PageLayoutRoute
             exact
             path={urls.Code}

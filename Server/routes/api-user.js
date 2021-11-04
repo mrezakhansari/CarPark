@@ -67,7 +67,8 @@ router.post('/addNewUserInfoFull', auth, async (req, res) => {
             "The operation has been done successfully" :
             "Operation failed";
 
-        api.VerifyLookup({ token: req.body.lastName, receptor: req.body.mobileNo, template: `template6`, type: "sms" }, function (er) {
+        api.VerifyLookup({ token: req.body.lastName, receptor: req.body.mobileNo, template: `template6`, type: "sms" },
+         function (er) {
             console.log(er)
         })
         return SendResponse(req, res, data, result[0]['OutVal'] !== false);

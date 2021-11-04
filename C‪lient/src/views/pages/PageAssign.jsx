@@ -12,6 +12,7 @@ import { Formik, Form } from "formik";
 import FormikControl from "../../components/common/formik/FormikControl";
 import * as Yup from 'yup';
 import Plate from "../../components/common/plate";
+import CustomPlateReading from '../../components/common/formik/CustomPlateReading';
 
 toast.configure({ bodyClassName: "customFont" });
 
@@ -72,9 +73,10 @@ const UserPage = (props) => {
                 //     text
                 // }</Tag>
                 // <Plate plateNo={text} height="7vh" width="14vw" fontSize="1.5vw" />
-                <Plate plateNo={text} height="100%" width="100%" fontSize="1.1em" />
+               // <Plate plateNo={text} height="100%" width="100%" fontSize="1.1em" />
+               <CustomPlateReading plateNo={text}/>
             ),
-            width: '9.5vw'
+            width: '16vw'
         },
         {
             title: 'نام خودرو',
@@ -293,7 +295,7 @@ const UserPage = (props) => {
                                         columns={Columns}
                                         dataSource={state.assignsListForGrid}
                                         pagination={false}
-                                        scroll={{ x: '70vw', y: '57vh' }}
+                                        scroll={{ x: 1000, y: 400 }}
                                     />
                                 </Col>
                             </Row>

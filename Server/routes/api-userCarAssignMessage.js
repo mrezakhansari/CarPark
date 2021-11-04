@@ -5,24 +5,24 @@ const { SendResponse } = require('../util/utility')
 const queries = require('../util/T-SQL/queries')
 const setting = require('../app-setting')
 const sworm = require('sworm');
-const auth = require('../middleware/auth');
 var Kavenegar = require('kavenegar');
 
-var api = Kavenegar.KavenegarApi({apikey: '63416D79483430636F3154443370535158556E6F4139792B364D6A61695762436E357A557471695874486F3D'});
+var api = Kavenegar.KavenegarApi({ apikey: '63416D79483430636F3154443370535158556E6F4139792B364D6A61695762436E357A557471695874486F3D' });
 
 
-router.post('/saveMessage', async (req, res) => {
+router.post('/saveMessage',  async (req, res) => {
   try {
     const db = sworm.db(setting.db.sqlConfig.CARALDB);
-    
+
+    console.log('req.user', req.user);
 
     var userInfo = await db.query(queries.USER.getUserInfoById, { id: req.body.toUser_id });
     if (userInfo.length > 0) {
-      console.log('add new message template', req.body,userInfo);
+      console.log('add new message template', req.body, userInfo);
 
-      api.VerifyLookup({token: userInfo[0]['LastName'] , receptor: userInfo[0]['MobileNo'],template:`template${req.body.messageTemplate_id}`,type:"sms"},function(er){
-          console.log(er)
-        })
+      api.VerifyLookup({ token: userInfo[0]['LastName'], receptor: userInfo[0]['MobileNo'], template: `template${req.body.messageTemplate_id}`, type: "sms" }, function (er) {
+        console.log(er)
+      })
       // api.Send({ message: req.body.messageText , sender: "1000596446" , receptor: userInfo[0]['MobileNo'] },function(er){
       //   console.log(er)
       // }); 
@@ -34,9 +34,9 @@ router.post('/saveMessage', async (req, res) => {
           messageTemplate_id: req.body.messageTemplate_id
         });
 
-        return SendResponse(req, res, 'پیغام شما به راننده ارسال گردید', true);
+      return SendResponse(req, res, 'پیغام شما به راننده ارسال گردید', true);
     }
-    
+
     // let resultSendMail = false;
     // var transporter = nodemailer.createTransport({
     //   service: 'gmail',

@@ -50,9 +50,35 @@ export function getJwt() {
   return localStorage.getItem(tokenKey);
 }
 
+export async function SendVerificationCode(user) {
+  console.log("from authserv", user)
+  const { data } = await http.post(apiEndpoint + '/SendVerificationCode', user);
+  console.log("from authserv", data)
+  if (data.result) {
+      //     const jwt = data.result.accessToken;
+      //     localStorage.setItem(tokenKey, jwt);
+      return { result: true, message: null };
+  }
+  return { result: false, message: data.data[0] };
+}
+
+export async function VerifyCode(code) {
+  console.log("user verify code", code)
+  const { data } = await http.post(apiEndpoint + '/VerifyCode', code);
+  console.log("then verify code", data)
+  if (data.result) {
+    const jwt = data.data[0].token;
+    localStorage.setItem(tokenKey, jwt);
+      return { result: true, message: null };
+  }
+  return { result: false, message: data.data[0] };
+}
+
 export default {
   login,
   logout,
   getCurrentUser,
-  getJwt
+  getJwt,
+  SendVerificationCode,
+  VerifyCode
 };

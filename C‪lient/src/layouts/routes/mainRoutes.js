@@ -31,7 +31,7 @@ const MainLayoutRoute = ({ location, path, render, ...rest }) => {
             auth.logout();
             return (<Redirect
                to={{
-                  pathname: "/login",
+                  pathname: "/",
                   state: { message: "Access to this section is forbidden" }
                }}
             />)
@@ -40,7 +40,7 @@ const MainLayoutRoute = ({ location, path, render, ...rest }) => {
       }
       return (<Redirect
          to={{
-            pathname: "/login",
+            pathname: "/firstPage",
             state: { from: matchProps.location }
          }}
       />)

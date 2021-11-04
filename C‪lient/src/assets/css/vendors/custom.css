@@ -142,6 +142,10 @@
 .customBackgroundColor{
   background-color:  rgba(218, 225, 230, 0.356);
 }
+.customBackgroundColor1{
+ 
+  background-color:  rgba(64, 54, 105, 0.562);
+}
 
 .scroll{
   overflow-y: scroll;
@@ -189,3 +193,5 @@ position: relative;
   /* height: calc(100% - 1vh);
   padding-bottom: "1px";  */
 }
+
+
